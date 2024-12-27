@@ -74,7 +74,6 @@ window.Bar {
         button {
             all: unset;
             background-color: transparent;
-
             &:hover label {
                 background-color: color.adjust($fg, $alpha: -0.84);
                 border-color: color.adjust($accent, $alpha: -0.8);
