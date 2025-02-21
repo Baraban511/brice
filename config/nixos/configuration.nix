@@ -85,6 +85,8 @@
       bun
       gh
       wrangler
+      nixd
+      brightnessctl
 ];
 
   # Some programs need SUID wrappers, can be configured further or are
