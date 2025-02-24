@@ -1,9 +1,0 @@
-[terminal]
-vt = 1
-
-[keymap]
-keymap = "fr"
-
-[default_session]
-command = "cage -s -- regreet"
-user = "greeter"

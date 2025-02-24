@@ -1,94 +1,129 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
 { config, lib, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+imports =
+  [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+boot.loader.systemd-boot.enable = true;
+boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "Nixos"; # Define your hostname.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+networking.hostName = "Nixos"; # Define your hostname.
+networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
-  # Set your time zone.
-  time.timeZone = "Europe/Paris";
+# Set your time zone.
+time.timeZone = "Europe/Paris";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+# Configure network proxy if necessary
+# networking.proxy.default = "http://user:password@proxy:port/";
+# networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "fr_FR.UTF-8";
-  console = {
-     font = "Lat2-Terminus16";
-     keyMap = "fr";
-  #   useXkbConfig = true; # use xkb.options in tty.
+# Select internationalisation properties.
+i18n.defaultLocale = "fr_FR.UTF-8";
+console = {
+   font = "Noto Sans 11";
+   keyMap = "fr";
+   # useXkbConfig = true; # use xkb.options in tty.
+};
+# Enable the X11 windowing system.
+# services.xserver.enable = true;
+
+nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+# Configure keymap in X11
+# services.xserver.xkb.layout = "fr";
+# services.xserver.xkb.options = "eurosign:e,caps:escape";
+
+# Enable CUPS to print documents.
+# services.printing.enable = true;
+
+# Enable sound.
+services.pipewire = {
+   enable = true;
+   pulse.enable = true;
+ };
+# Aliases
+programs.bash.shellAliases = {
+  zed = "zeditor";
+  brice = "zeditor brice && exit";
+  wifi = "nmtui";
+  rebuild = "sudo nixos-rebuild switch";
+};
+services.libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
+hardware.bluetooth.enable = true; # Enable support for Bluetooth
+
+# Define a user account. Don't forget to set a password with ‘passwd’.
+users.users.barab = {
+   isNormalUser = true;
+   home = "/home/barab";
+   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+ };
+
+services.greetd = {
+  enable = true;
+  settings = {
+    default_session = {
+        command = "Hyprland --config /etc/greetd/hyprland.conf";
+      };
   };
+};
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
+services.flatpak.enable = true;
+services.cloudflare-warp.enable = true;
+services.gvfs.enable = true; # For nautilus
+services.blueman.enable = true; # GUI Bluetooth manager
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+programs.firefox.enable = true;
+programs.hyprland.enable = true;
+programs.git.enable = true;
+programs.kdeconnect.enable = true;
+programs.neovim.enable = true;
+programs.neovim.defaultEditor = true;
 
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  services.pipewire = {
-     enable = true;
-     pulse.enable = true;
-   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  services.blueman.enable = true; # GUI Bluetooth manager
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.barab = {
-     isNormalUser = true;
-     home = "/home/barab";
-     createHome = true;
-     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-   };
-
-  programs.firefox.enable = true;
-  programs.hyprland.enable = true;
-  programs.git.enable = true;
-  services.flatpak.enable = true;
-  programs.kdeconnect.enable = true;
-  services.gvfs.enable = true; # For nautilus
-  programs.neovim.enable = true;
-  programs.neovim.defaultEditor = true;
 # List packages installed in system profile. To search, run:
 # $ nix search wget
   environment.systemPackages = with pkgs; [
-      kitty
-      nautilus
-      fastfetch
-      walker
-      hyprpaper
-      hyprpolkitagent
-      xdg-desktop-portal-hyprland
-      zed-editor
-      bun
-      gh
-      wrangler
-      nixd
-      brightnessctl
+    kitty
+    nautilus # File manager
+    fastfetch
+    walker
+    hyprpaper
+    hyprpolkitagent
+    zed-editor
+    bun
+    gh
+    wrangler
+    nixd # Nix language daemon
+    nil # Nix language server
+    brightnessctl
+    starship
+    grim # Screenshots
+    gnome-themes-extra
+    bibata-cursors
+    greetd.regreet
 ];
+fonts.packages = with pkgs; [
+  noto-fonts
+  noto-fonts-emoji
+  fira-code
+  fira-code-symbols
+];
+# Allowing unfree packages
+nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "cloudflare-warp"
+];
+# Définir le curseur globalement
+environment.variables = {
+  XCURSOR_THEME = "Bibata-Modern-Classic";
+  XCURSOR_SIZE = "16";
+};
 
+environment.sessionVariables.NIXOS_OZONE_WL = "1"; # Hint Electron apps to use Wayland
+environment.etc."greetd/hyprland.conf".source = /home/barab/brice/config/greetd/hyprland.conf;
+environment.etc."gtk-3.0/settings.ini".source = /home/barab/brice/config/gtk-3.0.ini;
+environment.etc."greetd/regreet.toml".source = /home/barab/brice/config/greetd/regreet.toml;
+environment.etc."greetd/wallpaper.png".source = /home/barab/brice/assets/wallpapers/regreet.png;
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -111,7 +146,7 @@
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
-  system.copySystemConfiguration = true;
+system.copySystemConfiguration = true;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
@@ -130,6 +165,6 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "24.11"; # Did you read the comment?
+system.stateVersion = "24.11"; # Did you read the comment?
 
 }

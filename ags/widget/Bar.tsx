@@ -6,7 +6,6 @@ import Mpris from "gi://AstalMpris";
 import Tray from "gi://AstalTray";
 import Network from "gi://AstalNetwork";
 import Hyprland from "gi://AstalHyprland";
-import { Slider } from "../../../../../../usr/share/astal/gjs/gtk3/widget";
 
 function Audio() {
   const mpris = Mpris.get_default();
@@ -67,6 +66,7 @@ function AudioSlider() {
     </box>
   );
 }
+
 function Time({ format = "%H:%M - %A %e" }) {
   const time = Variable<string>("").poll(
     1000,
