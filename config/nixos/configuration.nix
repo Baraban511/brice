@@ -77,6 +77,7 @@ services.gvfs.enable = true; # For nautilus
 services.blueman.enable = true; # GUI Bluetooth manager
 services.upower.enable = true; # For Astal battery
 
+programs.nix-ld.enable = true; # Used by miniflare
 programs.firefox.enable = true;
 programs.hyprland.enable = true;
 programs.git.enable = true;
@@ -105,6 +106,7 @@ programs.neovim.defaultEditor = true;
     gnome-themes-extra
     bibata-cursors
     greetd.regreet
+    btop # Ressource monitor
 ];
 fonts.packages = with pkgs; [
   noto-fonts
