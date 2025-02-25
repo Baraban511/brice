@@ -5,6 +5,8 @@ imports =
     ./hardware-configuration.nix
   ];
 
+
+
   # Use the systemd-boot EFI boot loader.
 boot.loader.systemd-boot.enable = true;
 boot.loader.efi.canTouchEfiVariables = true;
@@ -73,6 +75,7 @@ services.flatpak.enable = true;
 services.cloudflare-warp.enable = true;
 services.gvfs.enable = true; # For nautilus
 services.blueman.enable = true; # GUI Bluetooth manager
+services.upower.enable = true; # For Astal battery
 
 programs.firefox.enable = true;
 programs.hyprland.enable = true;
@@ -166,5 +169,4 @@ system.copySystemConfiguration = true;
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
 system.stateVersion = "24.11"; # Did you read the comment?
-
 }

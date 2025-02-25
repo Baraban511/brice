@@ -7,7 +7,7 @@ import Tray from "gi://AstalTray";
 import Network from "gi://AstalNetwork";
 import Hyprland from "gi://AstalHyprland";
 
-function Audio() {
+function MultiBox() {
   const mpris = Mpris.get_default();
   return (
     <box className="fademedia">
@@ -21,18 +21,19 @@ function Workspaces() {
 
   return (
     <box className="Workspaces">
-      {bind(hypr, "workspaces").as((wss) =>
-        wss
+      {bind(hypr, "workspaces").as((workspaces) =>
+        workspaces
           .filter((ws) => !(ws.id >= -99 && ws.id <= -2)) // filter out special workspaces
           .sort((a, b) => a.id - b.id)
-          .map((ws) => (
+          .map((workspace) => (
             <button
-              className={bind(hypr, "focusedWorkspace").as((fw) =>
-                ws === fw ? "focused" : "",
+              className={bind(hypr, "focusedWorkspace").as(
+                (focusedWorkspace) =>
+                  workspace === focusedWorkspace ? "focused" : "",
               )}
-              onClicked={() => ws.focus()}
+              onClicked={() => workspace.focus()}
             >
-              {ws.id}
+              {workspace.id}
             </button>
           )),
       )}
@@ -46,7 +47,7 @@ function Wifi() {
   return (
     <icon
       tooltipText={bind(wifi, "ssid").as(String)}
-      className="Wifi"
+      className="Wifi space"
       icon={bind(wifi, "iconName")}
     />
   );
@@ -108,7 +109,7 @@ function BatteryLevel() {
 
   return (
     <box className="Battery" visible={bind(bat, "isPresent")}>
-      <icon icon={bind(bat, "batteryIconName")} />
+      <icon icon={bind(bat, "batteryIconName")} className="space" />
       <label
         label={bind(bat, "percentage").as((p) => `${Math.floor(p * 100)} %`)}
       />
@@ -132,7 +133,7 @@ export default function Bar(monitor: Gdk.Monitor) {
           <Wifi />
         </box>
         <box>
-          <Audio />
+          <MultiBox />
         </box>
         <box hexpand halign={Gtk.Align.END}>
           <BatteryLevel />

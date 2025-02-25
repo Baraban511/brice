@@ -3,16 +3,21 @@
 $bg: #212223;
 $fg: #f1f1f1;
 $accent: #378df7;
-$radius: 7px;
+$radius: 15px;
 
 window.Bar {
-    border: none;
+    centerbox {
+        margin: 0 5px;
+    }
+    .space {
+        margin: 5px;
+    }
     box-shadow: none;
     color: $fg;
     font-size: 1.1em;
     font-weight: bold;
     label {
-        margin: 0 8px;
+        margin: 0 1px;
     }
 
     .fademedia {
@@ -31,11 +36,6 @@ window.Bar {
         background-position: center;
         background-size: contain;
         border-radius: 3px;
-    }
-
-    .Battery label {
-        padding-left: 0;
-        margin-left: 0;
     }
 
     .AudioSlider {
@@ -74,9 +74,9 @@ window.Bar {
         button {
             all: unset;
             background-color: transparent;
+
             &:hover label {
-                background-color: color.adjust($fg, $alpha: -0.84);
-                border-color: color.adjust($accent, $alpha: -0.8);
+                background-color: color.adjust($fg, $alpha: -0.8);
             }
 
             &:active label {
@@ -85,9 +85,9 @@ window.Bar {
         }
         label {
             transition: 200ms;
-            border-radius: 3px;
-            padding-left: 1px;
-            padding-right: 1px;
+            border-radius: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
         }
 
         .focused label {
