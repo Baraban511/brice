@@ -38,7 +38,7 @@ nix.settings.experimental-features = [ "nix-command" "flakes" ];
 # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
 # Enable CUPS to print documents.
-# services.printing.enable = true;
+services.printing.enable = true;
 
 # Enable sound.
 services.pipewire = {
@@ -77,7 +77,6 @@ services.gvfs.enable = true; # For nautilus
 services.blueman.enable = true; # GUI Bluetooth manager
 services.upower.enable = true; # For Astal battery
 
-programs.nix-ld.enable = true; # Used by miniflare
 programs.firefox.enable = true;
 programs.hyprland.enable = true;
 programs.git.enable = true;
@@ -106,6 +105,7 @@ programs.neovim.defaultEditor = true;
     gnome-themes-extra
     bibata-cursors
     greetd.regreet
+    gnome-disk-utility
     btop # Ressource monitor
 ];
 fonts.packages = with pkgs; [
