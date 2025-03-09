@@ -5,7 +5,11 @@ imports =
     ./hardware-configuration.nix
   ];
 
-
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
 
   # Use the systemd-boot EFI boot loader.
 boot.loader.systemd-boot.enable = true;
@@ -141,13 +145,10 @@ environment.etc."greetd/wallpaper.png".source = /home/barab/brice/assets/wallpap
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 4321 ];
+  };
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
