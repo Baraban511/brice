@@ -28,7 +28,7 @@ time.timeZone = "Europe/Paris";
 # Select internationalisation properties.
 i18n.defaultLocale = "fr_FR.UTF-8";
 console = {
-   font = "Noto Sans 11";
+   font = "Lat2-Terminus16";
    keyMap = "fr";
    # useXkbConfig = true; # use xkb.options in tty.
 };
@@ -76,7 +76,7 @@ services.greetd = {
 };
 
 services.flatpak.enable = true;
-services.cloudflare-warp.enable = true;
+services.cloudflare-warp.enable = true; # 1.1.1.1
 services.gvfs.enable = true; # For nautilus
 services.blueman.enable = true; # GUI Bluetooth manager
 services.upower.enable = true; # For Astal battery
@@ -111,6 +111,7 @@ programs.neovim.defaultEditor = true;
     greetd.regreet
     gnome-disk-utility
     btop # Ressource monitor
+    rquickshare
 ];
 fonts.packages = with pkgs; [
   noto-fonts
@@ -121,18 +122,20 @@ fonts.packages = with pkgs; [
 # Allowing unfree packages
 nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "cloudflare-warp"
+    "albert"
 ];
 # Définir le curseur globalement
 environment.variables = {
   XCURSOR_THEME = "Bibata-Modern-Classic";
   XCURSOR_SIZE = "16";
+  KITTY_CONFIG_DIRECTORY="/home/barab/brice/config/"; # Define kitty config directory
 };
 
 environment.sessionVariables.NIXOS_OZONE_WL = "1"; # Hint Electron apps to use Wayland
 environment.etc."greetd/hyprland.conf".source = /home/barab/brice/config/greetd/hyprland.conf;
-environment.etc."gtk-3.0/settings.ini".source = /home/barab/brice/config/gtk-3.0.ini;
 environment.etc."greetd/regreet.toml".source = /home/barab/brice/config/greetd/regreet.toml;
 environment.etc."greetd/wallpaper.png".source = /home/barab/brice/assets/wallpapers/regreet.png;
+environment.etc."gtk-3.0/settings.ini".source = /home/barab/brice/config/gtk-3.0.ini; # Define GTK mouse cursor
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -147,7 +150,7 @@ environment.etc."greetd/wallpaper.png".source = /home/barab/brice/assets/wallpap
   # services.openssh.enable = true;
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 4321 ];
+    allowedTCPPorts = [ 4321 ]; # Allow astro --host
   };
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
