@@ -5,6 +5,7 @@ imports =
     ./hardware-configuration.nix
     ../../global.nix
   ];
+  networking.hostName = "nix-pc";
 # Aliases
 #programs.bash.shellAliases = {};
 hardware.bluetooth.enable = true; # Enable support for Bluetooth

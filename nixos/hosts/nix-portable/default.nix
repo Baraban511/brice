@@ -5,6 +5,7 @@
       ./hardware-configuration.nix
       ../../global.nix
     ];
+    networking.hostName = "nix-portable";
   programs.bash.shellAliases = {
     wifi = "nmtui";
   };
