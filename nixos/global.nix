@@ -93,7 +93,7 @@ programs.neovim.enable = true;
     gnome-disk-utility
     btop # Ressource monitor
     nwg-look # GTK theme editor
-    input-leap
+    lan-mouse
     rquickshare
 ];
 fonts.packages = with pkgs; [
