@@ -94,6 +94,7 @@ programs.neovim.enable = true;
     btop # Ressource monitor
     nwg-look # GTK theme editor
     deskflow
+    rquickshare
 ];
 fonts.packages = with pkgs; [
   noto-fonts
@@ -111,6 +112,7 @@ environment.variables = {
   XCURSOR_SIZE = "16";
   HYPRLAND_CONFIG = "brice/config/hypr/hyprland.conf";
   EDITOR="zeditor --wait";
+  KITTY_CONFIG_DIRECTORY="/home/barab/brice/config/";
 };
 
 environment.sessionVariables.NIXOS_OZONE_WL = "1"; # Hint Electron apps to use Wayland

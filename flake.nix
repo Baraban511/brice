@@ -23,7 +23,7 @@
       nix-portable = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./nixos/hosts/nix-pc/nix-portable
+          ./nixos/hosts/nix-portable
           ({ config, pkgs, ... }: {
                   environment.etc."greetd/hyprland.conf".source = "${self}/config/greetd/hyprland.conf";
                   environment.etc."gtk-3.0/settings.ini".source = "${self}/config/gtk-3.0.ini";
