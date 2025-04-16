@@ -1,6 +1,9 @@
 { config, lib, pkgs, ... }:
 {
 imports = [];
+networking.firewall = {
+  allowedUDPPorts = [ 4242 ];
+};
 
   services.avahi = { # mDNS, IPv4
     enable = true;
