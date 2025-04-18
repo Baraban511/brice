@@ -98,6 +98,7 @@ programs.neovim.enable = true;
     nwg-look # GTK theme editor
     lan-mouse
     rquickshare
+    localsend
 ];
 fonts.packages = with pkgs; [
   noto-fonts
