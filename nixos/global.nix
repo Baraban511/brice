@@ -68,6 +68,11 @@ programs.bash = {
       brice = "zeditor brice && exit";
       rebuild = "sudo nixos-rebuild switch --flake /home/barab/brice/";
     };
+    interactiveShellInit = ''
+          if [[ -z $WAYLAND_DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+            exec Hyprland
+          fi
+        '';
   };
 programs.firefox.enable = true;
 programs.hyprland.enable = true;
