@@ -101,10 +101,11 @@ programs.neovim.enable = true;
     gnome-disk-utility
     btop # Ressource monitor
     nwg-look # GTK theme editor
-    lan-mouse
+    # lan-mousel
     rquickshare
     localsend
 ];
+services.gnome.gnome-keyring.enable = true;
 fonts.packages = with pkgs; [
   noto-fonts
   noto-fonts-emoji
@@ -114,6 +115,7 @@ fonts.packages = with pkgs; [
 # Allowing unfree packages
 nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "cloudflare-warp"
+    "beeper"
 ];
 # Définir le curseur globalement
 environment.variables = {

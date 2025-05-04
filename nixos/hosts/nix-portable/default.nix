@@ -15,7 +15,12 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [
+    linuxKernel.packages.linux_latest_libre.xone
+    chromium
+    beeper
+    pavucontrol
+  ];
   # Allowing unfree packages
   #nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [];
   # Définir le curseur globalement
