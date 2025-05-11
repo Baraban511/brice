@@ -3,7 +3,6 @@ import { Variable, GLib, bind } from "astal";
 import Battery from "gi://AstalBattery";
 import Wp from "gi://AstalWp";
 import Mpris from "gi://AstalMpris";
-import Tray from "gi://AstalTray";
 import Network from "gi://AstalNetwork";
 import Hyprland from "gi://AstalHyprland";
 
@@ -83,23 +82,26 @@ function Media() {
 
   return (
     <box className="Media">
-      {bind(mpris, "players").as((ps) => (
-        <box>
-          <box
-            className="Cover"
-            valign={Gtk.Align.CENTER}
-            css={bind(ps[0], "coverArt").as(
-              (cover) => `background-image: url('${cover}');`,
-            )}
-          />
-          <label
-            label={bind(ps[0], "title").as(
-              () =>
-                `${ps[0].title ? ps[0].title : ""} - ${ps[0].artist ? ps[0].artist : ""}`,
-            )}
-          />
-        </box>
-      ))}
+      {bind(mpris, "players").as((ps) =>
+        ps[0] ? (
+          <box>
+            <box
+              className="Cover"
+              valign={Gtk.Align.CENTER}
+              css={bind(ps[0], "coverArt").as(
+                (cover) => `background-image: url('${cover}');`,
+              )}
+            />
+            <label
+              label={bind(ps[0], "metadata").as(
+                () => `${ps[0].title} - ${ps[0].artist}`,
+              )}
+            />
+          </box>
+        ) : (
+          <label label="Nothing Playing" />
+        ),
+      )}
     </box>
   );
 }

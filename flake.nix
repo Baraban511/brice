@@ -1,15 +1,25 @@
 {
-  description = "brice, barab.'s nixos configuration";
+  description = "brice, barab.'s nixos configuration and bags ags project";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    ags = {
+      url = "github:aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     self,
     nixpkgs,
+    ags,
     ...
-  }: {
+  }: let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+  in {
+    # NixOS configurations
     nixosConfigurations = {
       nix-pc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -34,6 +44,26 @@
             environment.etc."greetd/regreet.toml".source = "${self}/config/greetd/regreet.toml";
             environment.etc."greetd/regreet.png".source = "${self}/wallpapers/regreet.png";
           }
+        ];
+      };
+    };
+
+    # AGS project (bags)
+    packages.${system} = {
+      bags = ags.lib.bundle {
+        inherit pkgs;
+        src = ./bags;
+        name = "bags";
+        entry = "app.ts";
+        gtk4 = false;
+
+        # additional libraries and executables to add to gjs' runtime
+        extraPackages = [
+          ags.packages.${system}.battery
+          ags.packages.${system}.wireplumber
+          ags.packages.${system}.mpris
+          ags.packages.${system}.network
+          ags.packages.${system}.hyprland
         ];
       };
     };
