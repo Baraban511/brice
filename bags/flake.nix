@@ -2,7 +2,7 @@
   description = "bags is my ags project";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     ags = {
       url = "github:aylur/ags";
@@ -24,24 +24,15 @@
         src = ./.;
         name = "bags";
         entry = "app.ts";
+        gtk4 = false;
 
         # additional libraries and executables to add to gjs' runtime
         extraPackages = [
-          # ags.packages.${system}.battery
-          # pkgs.fzf
-        ];
-      };
-    };
-
-    devShells.${system} = {
-      default = pkgs.mkShell {
-        buildInputs = [
-          # includes astal3 astal4 astal-io by default
-          (ags.packages.${system}.default.override {
-            extraPackages = [
-              # cherry pick packages
-            ];
-          })
+          ags.packages.${system}.battery
+          ags.packages.${system}.wireplumber
+          ags.packages.${system}.mpris
+          ags.packages.${system}.network
+          ags.packages.${system}.hyprland
         ];
       };
     };
