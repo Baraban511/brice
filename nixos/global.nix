@@ -2,9 +2,9 @@
 {
 imports = [];
 networking.firewall = {
+  enable = true;
   allowedUDPPorts = [ 4242 ];
 };
-
   services.avahi = { # mDNS, IPv4
     enable = true;
     nssmdns4 = true;
@@ -80,6 +80,7 @@ programs.neovim.enable = true;
     kitty # Terminal
     nautilus # File manager
     fastfetch
+
     walker # Launcher
     hyprpaper # Wallpaper utility
     hyprpolkitagent
@@ -99,16 +100,38 @@ programs.neovim.enable = true;
     lan-mouse
     rquickshare
 ];
-fonts.packages = with pkgs; [
-  noto-fonts
-  noto-fonts-emoji
-  fira-code
-  fira-code-symbols
-];
 # Allowing unfree packages
 nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "cloudflare-warp"
 ];
+
+fonts = {
+    packages = with pkgs; [
+      # icon fonts
+      material-design-icons
+
+      # normal fonts
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-emoji
+      fira-code
+      fira-code-symbols
+    ];
+
+    # use fonts specified by user rather than default ones
+    enableDefaultPackages = false;
+
+    # user defined fonts
+    # the reason there's Noto Color Emoji everywhere is to override DejaVu's
+    # B&W emojis that would sometimes show instead of some Color emojis
+    fontconfig.defaultFonts = {
+      serif = ["Noto Serif" "Noto Color Emoji"];
+      sansSerif = ["Noto Sans" "Noto Color Emoji"];
+      monospace = ["FiraCode Mono" "Noto Color Emoji"];
+      emoji = ["Noto Color Emoji"];
+    };
+  };
+
 # Définir le curseur globalement
 environment.variables = {
   XCURSOR_THEME = "Bibata-Modern-Classic";
@@ -131,8 +154,4 @@ environment.sessionVariables.NIXOS_OZONE_WL = "1"; # Hint Electron apps to use W
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ 4321 ];
-  };
 }
