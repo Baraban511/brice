@@ -1,35 +1,27 @@
-{ config, lib, pkgs, ... }:
 {
-imports =
-  [ # Include the results of the hardware scan.
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../global.nix
   ];
   networking.hostName = "nix-pc";
   system.autoUpgrade = true;
-# Aliases
-#programs.bash.shellAliases = {};
-hardware.bluetooth.enable = true; # Enable support for Bluetooth
-services.blueman.enable = true; # GUI Bluetooth manager
+  hardware.bluetooth.enable = true; # Enable support for Bluetooth
+  services.blueman.enable = true; # GUI Bluetooth manager
 
-# List packages installed in system profile. To search, run:
-# $ nix search wget
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
   environment.systemPackages = with pkgs; [
     refind
     hyperion-ng
   ];
-# Allowing unfree packages
-#nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [];
-#environment.variables = {};
-  #networking.firewall = {
-    #allowedTCPPorts = [ 4321 ];
-  #};
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true; # not supported by flakes
 
-  # This option defines the firEDITOR="zeditor --wait"st version of NixOS you have installed on this particular machine,
+  # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #
   # Most users should NEVER change this value after the initial install, for any reason,
@@ -46,5 +38,5 @@ services.blueman.enable = true; # GUI Bluetooth manager
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 }
