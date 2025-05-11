@@ -10,7 +10,6 @@
     ../../global.nix
   ];
   networking.hostName = "nix-pc";
-  system.autoUpgrade = true;
   hardware.bluetooth.enable = true; # Enable support for Bluetooth
   services.blueman.enable = true; # GUI Bluetooth manager
 
