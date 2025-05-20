@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  inputs,
   pkgs,
   ...
 }: {
@@ -12,7 +13,6 @@
     networkmanager.enable = true; # Networkmanager for networking
     firewall = {
       enable = true;
-      allowedUDPPorts = [4242];
     };
   };
   nix = {

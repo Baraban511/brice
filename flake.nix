@@ -3,6 +3,9 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    hyprlux = {
+      url = "github:amadejkastelic/Hyprlux";
+    };
 
     ags = {
       url = "github:aylur/ags";
@@ -14,6 +17,7 @@
     self,
     nixpkgs,
     ags,
+    hyprlux,
     ...
   }: let
     system = "x86_64-linux";
@@ -25,6 +29,7 @@
         system = "x86_64-linux";
         modules = [
           ./nixos/hosts/nix-pc
+          hyprlux.nixosModules.default
           {
             environment.etc."greetd/hyprland.conf".source = "${self}/config/greetd/hyprland.conf";
             environment.etc."gtk-3.0/settings.ini".source = "${self}/config/gtk-3.0.ini";
@@ -38,6 +43,7 @@
         system = "x86_64-linux";
         modules = [
           ./nixos/hosts/nix-portable
+          hyprlux.nixosModules.default
           {
             environment.etc."greetd/hyprland.conf".source = "${self}/config/greetd/hyprland.conf";
             environment.etc."gtk-3.0/settings.ini".source = "${self}/config/gtk-3.0.ini";

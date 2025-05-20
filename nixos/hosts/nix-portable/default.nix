@@ -31,9 +31,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    chromium
-    beeper
-    pavucontrol
+    hyprlock
   ];
   # Allowing unfree packages
   #nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [];
