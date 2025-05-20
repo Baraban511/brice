@@ -28,9 +28,12 @@
   services.blueman.enable = true; # GUI Bluetooth manager
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    hyprlock
-  ];
+  # environment.systemPackages = with pkgs; [
+  # ];
+  services.ollama = {
+    enable = true;
+    loadModels = ["gemma3:1b"];
+  };
   #networking.firewall = {
   # allowedTCPPorts = [ 4321 ];
   #};

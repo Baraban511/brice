@@ -37,29 +37,27 @@
     neovim.enable = true;
     hyprlux = {
       enable = true;
-
       night_light = {
         enabled = true;
         # Manual sunset and sunrise
         start_time = "22:00";
         end_time = "06:00";
         # Automatic sunset and sunrise
-        latitude = 46.056946;
-        longitude = 14.505751;
+        latitude = 45.750000;
+        longitude = 4.850000;
         temperature = 3500;
       };
-
       vibrance_configs = [
-        {
-          window_class = "steam_app_1172470";
-          window_title = "Apex Legends";
-          strength = 100;
-        }
-        {
-          window_class = "cs2";
-          window_title = "";
-          strength = 100;
-        }
+        # {
+        #   window_class = "steam_app_1172470";
+        #   window_title = "Apex Legends";
+        #   strength = 100;
+        # }
+        # {
+        #   window_class = "cs2";
+        #   window_title = "";
+        #   strength = 100;
+        # }
       ];
     };
   };
@@ -96,6 +94,7 @@
     kitty # Terminal
     nautilus # File manager
     fastfetch
+    hyprlock
   ];
 
   fonts = {

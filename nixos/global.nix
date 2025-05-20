@@ -3,6 +3,10 @@
     ./packages.nix
     ./services.nix
   ];
+  system.userActivationScripts = {
+    linkHypr = "ln -s /home/barab/brice/config/hypr /home/barab/.config/";
+    linkZed = "ln -s /home/barab/brice/config/zed /home/barab/.config/ ";
+  };
   networking = {
     networkmanager.enable = true; # Networkmanager for networking
     firewall = {
@@ -71,7 +75,7 @@
       XCURSOR_SIZE = "16";
       HYPRLAND_CONFIG = "brice/config/hypr/hyprland.conf";
       EDITOR = "zeditor --wait";
-      KITTY_CONFIG_DIRECTORY = "/home/barab/brice/config/";
+      KITTY_CONFIG_DIRECTORY = "/home/barab/brice/config";
       XDG_SESSION_DESKTOP = "Hyprland";
     };
   };
