@@ -7,3 +7,5 @@ application_prefer_dark_theme = true
 cursor_theme_name = "Bibata-Modern-Classic"
 [appearance]
 greeting_msg = "Re"
+[env]
+XCURSOR_SIZE = "16"

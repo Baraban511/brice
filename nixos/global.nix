@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  inputs,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./packages.nix
     ./services.nix
@@ -26,13 +20,10 @@
   };
 
   boot = {
-    loader.efi.canTouchEfiVariables = true;
-    loader.systemd-boot.enable = true; # Systemd boot
     plymouth = {
       enable = true;
       theme = "catppuccin-macchiato";
       themePackages = with pkgs; [
-        # By default we would install all themes
         catppuccin-plymouth
       ];
     };
@@ -47,10 +38,6 @@
       "udev.log_priority=3"
       "rd.systemd.show_status=auto"
     ];
-    # Hide the OS choice for bootloaders.
-    # It's still possible to open the bootloader list by pressing any key
-    # It will just not appear on screen unless a key is pressed
-    loader.timeout = 0;
   };
 
   time.timeZone = "Europe/Paris"; # Time zone
@@ -71,7 +58,6 @@
       "text/css" = "zed.desktop";
     };
   };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.barab = {
     isNormalUser = true;
@@ -89,7 +75,6 @@
       XDG_SESSION_DESKTOP = "Hyprland";
     };
   };
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

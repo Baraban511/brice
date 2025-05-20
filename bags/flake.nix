@@ -11,7 +11,6 @@
   };
 
   outputs = {
-    self,
     nixpkgs,
     ags,
   }: let
@@ -33,6 +32,7 @@
           ags.packages.${system}.mpris
           ags.packages.${system}.network
           ags.packages.${system}.hyprland
+          ags.packages.${system}.notifd
         ];
       };
     };

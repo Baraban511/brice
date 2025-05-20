@@ -90,11 +90,38 @@
     alejandra # Nix formatter
     nixd
     nil
+    chromium
+    beeper
+    pavucontrol
+    kitty # Terminal
+    nautilus # File manager
+    fastfetch
   ];
-  fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-emoji
-    fira-code
-    fira-code-symbols
-  ];
+
+  fonts = {
+    packages = with pkgs; [
+      # icon fonts
+      material-design-icons
+
+      # normal fonts
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-emoji
+      fira-code
+      fira-code-symbols
+    ];
+
+    # use fonts specified by user rather than default ones
+    enableDefaultPackages = false;
+
+    # user defined fonts
+    # the reason there's Noto Color Emoji everywhere is to override DejaVu's
+    # B&W emojis that would sometimes show instead of some Color emojis
+    fontconfig.defaultFonts = {
+      serif = ["Noto Serif"];
+      sansSerif = ["Noto Sans"];
+      monospace = ["FiraCode Mono"];
+      emoji = ["Noto Color Emoji"];
+    };
+  };
 }
