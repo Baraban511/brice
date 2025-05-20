@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./packages.nix
     ./services.nix
@@ -25,13 +20,10 @@
   };
 
   boot = {
-    loader.efi.canTouchEfiVariables = true;
-    loader.systemd-boot.enable = true; # Systemd boot
     plymouth = {
       enable = true;
       theme = "catppuccin-macchiato";
       themePackages = with pkgs; [
-        # By default we would install all themes
         catppuccin-plymouth
       ];
     };
@@ -46,10 +38,6 @@
       "udev.log_priority=3"
       "rd.systemd.show_status=auto"
     ];
-    # Hide the OS choice for bootloaders.
-    # It's still possible to open the bootloader list by pressing any key
-    # It will just not appear on screen unless a key is pressed
-    loader.timeout = 0;
   };
 
   time.timeZone = "Europe/Paris"; # Time zone
@@ -68,63 +56,6 @@
       "application/json" = "zed.desktop";
       "text/json" = "zed.desktop";
       "text/css" = "zed.desktop";
-    };
-  };
-# List packages installed in system profile. To search, run:
-# $ nix search wget
-  environment.systemPackages = with pkgs; [
-    kitty # Terminal
-    nautilus # File manager
-    fastfetch
-
-    walker # Launcher
-    hyprpaper # Wallpaper utility
-    hyprpolkitagent
-    zed-editor
-    bun
-    gh
-    nixd # Nix language server
-    nil
-    brightnessctl
-    grim # Screenshots
-    gnome-themes-extra
-    bibata-cursors
-    greetd.regreet # reGreet
-    gnome-disk-utility
-    btop # Ressource monitor
-    nwg-look # GTK theme editor
-    lan-mouse
-    rquickshare
-];
-# Allowing unfree packages
-nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "cloudflare-warp"
-];
-
-fonts = {
-    packages = with pkgs; [
-      # icon fonts
-      material-design-icons
-
-      # normal fonts
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
-      fira-code
-      fira-code-symbols
-    ];
-
-    # use fonts specified by user rather than default ones
-    enableDefaultPackages = false;
-
-    # user defined fonts
-    # the reason there's Noto Color Emoji everywhere is to override DejaVu's
-    # B&W emojis that would sometimes show instead of some Color emojis
-    fontconfig.defaultFonts = {
-      serif = ["Noto Serif" "Noto Color Emoji"];
-      sansSerif = ["Noto Sans" "Noto Color Emoji"];
-      monospace = ["FiraCode Mono" "Noto Color Emoji"];
-      emoji = ["Noto Color Emoji"];
     };
   };
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -151,10 +82,4 @@ fonts = {
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-  #
 }

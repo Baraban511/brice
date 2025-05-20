@@ -1,14 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{...}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../global.nix
   ];
+  boot = {
+    loader.efi.canTouchEfiVariables = true;
+    loader.systemd-boot.enable = true; # Systemd boot
+  };
   networking.hostName = "nix-portable";
   programs.bash.shellAliases = {
     wifi = "nmtui";
@@ -28,17 +27,6 @@
   services.libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
   services.blueman.enable = true; # GUI Bluetooth manager
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    chromium
-    beeper
-    pavucontrol
-  ];
-  # Allowing unfree packages
-  #nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [];
-  # Définir le curseur globalement
-  #environment.variables = {};
   #networking.firewall = {
   # allowedTCPPorts = [ 4321 ];
   #};

@@ -16,15 +16,43 @@
     ags,
     ...
   }: let
-    system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
-  in {
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+
+      # Module commun pour inclure bags dans les deux configurations
+      bagsModule = {
+        environment.systemPackages = [
+          self.packages.${system}.bags
+        ];
+      };
+    in {
+      # AGS project (bags)
+      packages.${system} = {
+        bags = ags.lib.bundle {
+          inherit pkgs;
+          src = ./bags;
+          name = "bags";
+          entry = "app.ts";
+          gtk4 = false;
+
+          # additional libraries and executables to add to gjs' runtime
+          extraPackages = [
+            ags.packages.${system}.battery
+            ags.packages.${system}.wireplumber
+            ags.packages.${system}.mpris
+            ags.packages.${system}.network
+            ags.packages.${system}.hyprland
+            ags.packages.${system}.notifd
+          ];
+        };
+      };
     # NixOS configurations
     nixosConfigurations = {
       nix-pc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./nixos/hosts/nix-pc
+          bagsModule
           {
             environment.etc."greetd/hyprland.conf".source = "${self}/config/greetd/hyprland.conf";
             environment.etc."gtk-3.0/settings.ini".source = "${self}/config/gtk-3.0.ini";
@@ -38,32 +66,13 @@
         system = "x86_64-linux";
         modules = [
           ./nixos/hosts/nix-portable
+          bagsModule
           {
             environment.etc."greetd/hyprland.conf".source = "${self}/config/greetd/hyprland.conf";
             environment.etc."gtk-3.0/settings.ini".source = "${self}/config/gtk-3.0.ini";
             environment.etc."greetd/regreet.toml".source = "${self}/config/greetd/regreet.toml";
             environment.etc."greetd/regreet.png".source = "${self}/wallpapers/regreet.png";
           }
-        ];
-      };
-    };
-
-    # AGS project (bags)
-    packages.${system} = {
-      bags = ags.lib.bundle {
-        inherit pkgs;
-        src = ./bags;
-        name = "bags";
-        entry = "app.ts";
-        gtk4 = false;
-
-        # additional libraries and executables to add to gjs' runtime
-        extraPackages = [
-          ags.packages.${system}.battery
-          ags.packages.${system}.wireplumber
-          ags.packages.${system}.mpris
-          ags.packages.${system}.network
-          ags.packages.${system}.hyprland
         ];
       };
     };
