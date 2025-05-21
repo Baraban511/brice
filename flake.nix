@@ -1,5 +1,5 @@
 {
-  description = "brice, barab.'s nixos configuration and bags ags project";
+  description = "brice, barab.'s nixos configuration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -11,44 +11,32 @@
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    bags = {
+      url = "path:./bags";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.ags.follows = "ags"; # Assurez-vous que bags utilise le même ags
+    };
   };
 
   outputs = {
     self,
     nixpkgs,
-    ags,
+    bags,
     hyprlux,
     ...
   }: let
     system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
 
     # Module commun pour inclure bags dans les deux configurations
     bagsModule = {
       environment.systemPackages = [
-        self.packages.${system}.bags
+        bags.packages.${system}.default # Utilisez le package par défaut du flake bags
       ];
     };
   in {
-    # AGS project (bags)
     packages.${system} = {
-      bags = ags.lib.bundle {
-        inherit pkgs;
-        src = ./bags;
-        name = "bags";
-        entry = "app.ts";
-        gtk4 = false;
-
-        # additional libraries and executables to add to gjs' runtime
-        extraPackages = [
-          ags.packages.${system}.battery
-          ags.packages.${system}.wireplumber
-          ags.packages.${system}.mpris
-          ags.packages.${system}.network
-          ags.packages.${system}.hyprland
-          ags.packages.${system}.notifd
-        ];
-      };
+      bags = bags.packages.${system}.default;
     };
     # NixOS configurations
     nixosConfigurations = {

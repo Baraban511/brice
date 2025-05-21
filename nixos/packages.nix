@@ -24,6 +24,7 @@
         zed = "zeditor";
         brice = "zeditor brice && exit";
         rebuild = "sudo nixos-rebuild switch --flake /home/barab/brice/";
+        update = "nix flake update --flake /home/barab/brice && nix flake update --flake /home/barab/brice/bags";
       };
       interactiveShellInit = ''
         if [[ -z $WAYLAND_DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
