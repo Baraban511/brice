@@ -101,6 +101,8 @@
     nautilus # File manager
     fastfetch
     hyprlock
+    spotify
+    discord
   ];
 
   fonts = {
