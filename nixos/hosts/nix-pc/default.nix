@@ -9,7 +9,6 @@
   services.blueman.enable = true; # GUI Bluetooth manager
   services.hardware.openrgb.enable = true;
   hardware.i2c.enable = true;
-  programs.bash.undistractMe.enable = true; # Notifications for long-running commands
   boot.loader = {
     grub = {
       enable = true;
