@@ -5,7 +5,7 @@ import Wp from "gi://AstalWp";
 import Mpris from "gi://AstalMpris";
 import Network from "gi://AstalNetwork";
 import Hyprland from "gi://AstalHyprland";
-
+//import Tray from "gi://AstalTray";
 function MultiBox() {
   const mpris = Mpris.get_default();
   return (
@@ -14,7 +14,6 @@ function MultiBox() {
     </box>
   );
 }
-
 function Workspaces() {
   const hypr = Hyprland.get_default();
 
@@ -121,7 +120,6 @@ function BatteryLevel() {
 
 export default function Bar(monitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;
-
   return (
     <window
       className="Bar"

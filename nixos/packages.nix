@@ -18,13 +18,14 @@
       };
     };
     bash = {
+      undistractMe.enable = true; # Notifications for long-running commands
       completion.enable = true;
       shellAliases = {
         # Shell aliases
         zed = "zeditor";
         brice = "zeditor brice && exit";
         rebuild = "sudo nixos-rebuild switch --flake /home/barab/brice/";
-        update = "nix flake update --flake /home/barab/brice && nix flake update --flake /home/barab/brice/bags";
+        update = "nix flake update --flake /home/barab/brice && nix flake update --flake /home/barab/brice/bags && flatpak update";
       };
       interactiveShellInit = ''
         if [[ -z $WAYLAND_DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
@@ -74,7 +75,11 @@
     bun
     gh
     brightnessctl
-    grim # Screenshots
+    # Screenshots
+    grim
+    swappy
+    slurp
+    wl-clipboard
     gnome-themes-extra
     bibata-cursors
     greetd.regreet # reGreet

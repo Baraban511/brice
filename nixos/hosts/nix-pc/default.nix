@@ -9,6 +9,7 @@
   services.blueman.enable = true; # GUI Bluetooth manager
   services.hardware.openrgb.enable = true;
   hardware.i2c.enable = true;
+  programs.bash.undistractMe.enable = true; # Notifications for long-running commands
   boot.loader = {
     grub = {
       enable = true;
@@ -41,12 +42,11 @@
     openrgb-with-all-plugins
     catppuccin-grub
     ledfx
-    ente-auth
+    #ente-auth
     ddcutil
     catppuccinifier-cli
     zettlr
     cliphist
-    wl-clipboard
   ];
   # systemd.services.monitor-on = {
   #   description = "Allumer le moniteur via DDC/CI au démarrage";

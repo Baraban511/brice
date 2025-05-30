@@ -33,21 +33,23 @@
           ags.packages.${system}.network
           ags.packages.${system}.hyprland
           ags.packages.${system}.notifd
+          ags.packages.${system}.tray
         ];
       };
     };
 
     devShells.${system} = {
       default = pkgs.mkShell {
-        buildInputs = [
-          (ags.packages.${system}.default.override {
+        buildInputs = with ags.packages.${system}; [
+          (default.override {
             extraPackages = [
-              ags.packages.${system}.battery
-              ags.packages.${system}.wireplumber
-              ags.packages.${system}.mpris
-              ags.packages.${system}.network
-              ags.packages.${system}.hyprland
-              ags.packages.${system}.notifd
+              battery
+              wireplumber
+              mpris
+              network
+              hyprland
+              notifd
+              tray
             ];
           })
         ];

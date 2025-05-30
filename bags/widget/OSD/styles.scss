@@ -5,13 +5,13 @@ window.OSD {
     box.OSD {
         border-radius: 100px;
         background-color: $bg-color;
-        padding: 13px 16px;
+        padding: 6px 10px;
         margin: 13px;
-        box-shadow: 3px 3px 7px 0 rgba(0,0,0,.4);
+        box-shadow: 3px 3px 7px 0 rgba(0, 0, 0, 0.4);
     }
 
     icon {
-        font-size: 4rem;
+        font-size: 2rem;
     }
 
     label {
@@ -20,11 +20,11 @@ window.OSD {
 
     levelbar {
         trough {
-            margin: 1 .6rem;
+            margin: 1 0.6rem;
         }
 
         block {
-            min-height: 2rem;
+            min-height: 1.5rem;
         }
     }
 }

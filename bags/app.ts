@@ -5,7 +5,11 @@ import OSD from "./widget/OSD/App";
 import OSDStyles from "./widget/OSD/styles.scss";
 import Notif from "./widget/Notifications/App";
 import NotifStyles from "./widget/Notifications/styles.scss";
+// import MediaPlayer from "./widget/MediaPlayer/App";
+// import MediaPlayerStyle from "./widget/MediaPlayer/styles.scss";
+
 App.start({
+  instanceName: "bar",
   css: BarStyles,
   main() {
     App.get_monitors().map(Bar);
