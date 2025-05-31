@@ -5,13 +5,18 @@
     ../../global.nix
   ];
   boot = {
-    loader.efi.canTouchEfiVariables = true;
-    loader.systemd-boot.enable = true; # Systemd boot
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = true; # Systemd boot
+    };
   };
   networking.hostName = "nix-portable";
   programs.bash.shellAliases = {
     wifi = "nmtui";
   };
+  # networking.firewall = {
+  #   allowedTCPPorts = [1701 9001];
+  # };
   hardware = {
     xone.enable = true;
     bluetooth = {
@@ -24,19 +29,16 @@
     };
     enableAllFirmware = true;
   };
-  services.libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
-  services.blueman.enable = true; # GUI Bluetooth manager
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  services = {
+    libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
+    blueman.enable = true; # GUI Bluetooth manager
+    ollama = {
+      enable = true;
+      loadModels = ["gemma3:1b"];
+    };
+  };
   # environment.systemPackages = with pkgs; [
   # ];
-  services.ollama = {
-    enable = true;
-    loadModels = ["gemma3:1b"];
-  };
-  #networking.firewall = {
-  # allowedTCPPorts = [ 4321 ];
-  #};
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.

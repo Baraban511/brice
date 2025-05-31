@@ -4,11 +4,54 @@
     ./hardware-configuration.nix
     ../../global.nix
   ];
+
   networking.hostName = "nix-pc";
-  hardware.bluetooth.enable = true; # Enable support for Bluetooth
-  services.blueman.enable = true; # GUI Bluetooth manager
-  services.hardware.openrgb.enable = true;
-  hardware.i2c.enable = true;
+  services = {
+    blueman.enable = true; # GUI Bluetooth manager
+    hardware.openrgb.enable = true;
+    sunshine = {
+      enable = true;
+      autoStart = true;
+      openFirewall = true;
+      capSysAdmin = true;
+      settings = {
+        sunshine_name = "nix-pc";
+        origin_web_ui_allowed = "lan";
+        wan_encryption_mode = "1";
+        fec_percentage = "20"; # 1-255
+      };
+      applications = {
+        env = {
+          PATH = "$(PATH):$(HOME)/.local/bin";
+        };
+        apps = [
+          {
+            name = "Desktop";
+            image-path = "desktop.png";
+          }
+          {
+            name = "Steam Big Picture";
+            detached = [
+              "setsid steam steam://open/bigpicture"
+            ];
+            image-path = "steam.png";
+          }
+          {
+            name = "New desktop";
+            detached = [
+              "setsid steam steam://open/bigpicture"
+            ];
+            image-path = "steam.png";
+          }
+        ];
+      };
+    };
+  };
+  hardware = {
+    bluetooth.enable = true; # Enable support for Bluetooth
+    i2c.enable = true;
+  };
+
   boot.loader = {
     grub = {
       enable = true;
