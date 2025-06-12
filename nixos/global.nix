@@ -6,6 +6,7 @@
   system.userActivationScripts = {
     linkHypr = "ln -s /home/barab/brice/config/hypr /home/barab/.config/";
     linkZed = "ln -s /home/barab/brice/config/zed /home/barab/.config/";
+    linkFastfetch = "ln -s /home/barab/brice/config/fastfetch /home/barab/.config/";
   };
   networking = {
     networkmanager.enable = true; # Networkmanager for networking
@@ -62,6 +63,11 @@
       "text/json" = "zed.desktop";
       "text/css" = "zed.desktop";
     };
+  };
+  qt = {
+    enable = true;
+    platformTheme = "gnome";
+    style = "adwaita";
   };
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.barab = {

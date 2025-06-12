@@ -26,30 +26,32 @@
         entry = "app.ts";
 
         # additional libraries and executables to add to gjs' runtime
-        extraPackages = [
-          ags.packages.${system}.battery
-          ags.packages.${system}.wireplumber
-          ags.packages.${system}.mpris
-          ags.packages.${system}.network
-          ags.packages.${system}.hyprland
-          ags.packages.${system}.notifd
-          ags.packages.${system}.tray
+        extraPackages = with ags.packages.${system}; [
+          battery
+          wireplumber
+          mpris
+          network
+          hyprland
+          notifd
+          tray
+          apps
         ];
       };
     };
 
     devShells.${system} = {
       default = pkgs.mkShell {
-        buildInputs = with ags.packages.${system}; [
-          (default.override {
+        buildInputs = [
+          (ags.packages.${system}.default.override {
             extraPackages = [
-              battery
-              wireplumber
-              mpris
-              network
-              hyprland
-              notifd
-              tray
+              ags.packages.${system}.battery
+              ags.packages.${system}.wireplumber
+              ags.packages.${system}.mpris
+              ags.packages.${system}.network
+              ags.packages.${system}.hyprland
+              ags.packages.${system}.notifd
+              ags.packages.${system}.tray
+              ags.packages.${system}.apps
             ];
           })
         ];

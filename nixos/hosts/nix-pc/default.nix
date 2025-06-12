@@ -4,7 +4,9 @@
     ./hardware-configuration.nix
     ../../global.nix
   ];
-
+  environment.variables = {
+    BAGS_TYPE = "pc";
+  };
   networking.hostName = "nix-pc";
   services = {
     blueman.enable = true; # GUI Bluetooth manager
@@ -14,44 +16,13 @@
       autoStart = true;
       openFirewall = true;
       capSysAdmin = true;
-      settings = {
-        sunshine_name = "nix-pc";
-        origin_web_ui_allowed = "lan";
-        wan_encryption_mode = "1";
-        fec_percentage = "20"; # 1-255
-      };
-      applications = {
-        env = {
-          PATH = "$(PATH):$(HOME)/.local/bin";
-        };
-        apps = [
-          {
-            name = "Desktop";
-            image-path = "desktop.png";
-          }
-          {
-            name = "Steam Big Picture";
-            detached = [
-              "setsid steam steam://open/bigpicture"
-            ];
-            image-path = "steam.png";
-          }
-          {
-            name = "New desktop";
-            detached = [
-              "setsid steam steam://open/bigpicture"
-            ];
-            image-path = "steam.png";
-          }
-        ];
-      };
     };
   };
   hardware = {
     bluetooth.enable = true; # Enable support for Bluetooth
     i2c.enable = true;
   };
-
+  virtualisation.waydroid.enable = true;
   boot.loader = {
     grub = {
       enable = true;
@@ -80,15 +51,22 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # Needed
     hyperhdr
-    openrgb-with-all-plugins
     catppuccin-grub
+    ddcutil
+    # In tests
+    openrgb-with-all-plugins
     ledfx
     #ente-auth
-    ddcutil
     catppuccinifier-cli
     zettlr
     cliphist
+    typst
+    rofi
+    wl-clipboard
+    rclone
+    sunshine
   ];
   # systemd.services.monitor-on = {
   #   description = "Allumer le moniteur via DDC/CI au démarrage";

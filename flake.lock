@@ -67,11 +67,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1735852727,
-        "narHash": "sha256-t5IBNLpQ523yOa5zFHH05kpGLHmaCIUo7IVKVZKrq+M=",
+        "lastModified": 1749039616,
+        "narHash": "sha256-4ebC0v/mRT9tUEPZWKkZ+L0eBOvzqQoZVttYevURYDE=",
         "owner": "amadejkastelic",
         "repo": "Hyprlux",
-        "rev": "1fd49828d91a127348082aa469bc81049ecfc76c",
+        "rev": "4b9929fdc5ab41a721a1315408ac38f3d12b395f",
         "type": "github"
       },
       "original": {
@@ -98,11 +98,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1748370509,
-        "narHash": "sha256-QlL8slIgc16W5UaI3w7xHQEP+Qmv/6vSNTpoZrrSlbk=",
+        "lastModified": 1749285348,
+        "narHash": "sha256-frdhQvPbmDYaScPFiCnfdh3B/Vh81Uuoo0w5TkWmmjU=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "4faa5f5321320e49a78ae7848582f684d64783e9",
+        "rev": "3e3afe5174c561dee0df6f2c2b2236990146329f",
         "type": "github"
       },
       "original": {

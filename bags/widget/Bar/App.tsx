@@ -1,15 +1,49 @@
-import { App, Astal, Gtk, Gdk } from "astal/gtk3";
+import { Astal, Gtk, Gdk } from "astal/gtk3";
 import { Variable, GLib, bind } from "astal";
 import Battery from "gi://AstalBattery";
-import Wp from "gi://AstalWp";
 import Mpris from "gi://AstalMpris";
-import Network from "gi://AstalNetwork";
 import Hyprland from "gi://AstalHyprland";
-//import Tray from "gi://AstalTray";
+import Tray from "gi://AstalTray";
+import Network from "gi://AstalNetwork";
+// import Wp from "gi://AstalWp";
+function Wifi() {
+  const { wifi } = Network.get_default();
+  // console.log(Network.Primary);
+  return (
+    <icon
+      tooltipText={bind(wifi, "ssid").as(String)}
+      className="Wifi space"
+      icon={bind(wifi, "iconName")}
+    />
+  );
+}
+
+function SystemTray() {
+  var tray = Tray.get_default();
+  return (
+    <box className="SystemTray">
+      {bind(tray, "items").as((items) =>
+        items.map((item) => (
+          <button
+            className="TrayItem"
+            onClicked={(event) => console.log("Clicked")}
+            tooltipText={
+              item.tooltip_markup ||
+              item.title[0].toUpperCase() + item.title.slice(1)
+            }
+          >
+            <icon gicon={item.gicon} />
+          </button>
+        )),
+      )}
+    </box>
+  );
+}
+
 function MultiBox() {
   const mpris = Mpris.get_default();
   return (
-    <box className="fademedia">
+    <box>
       {bind(mpris, "players").as((ps) => (ps[0] ? <Media /> : <Workspaces />))}
     </box>
   );
@@ -18,7 +52,7 @@ function Workspaces() {
   const hypr = Hyprland.get_default();
 
   return (
-    <box className="Workspaces">
+    <box className="Workspaces fademedia">
       {bind(hypr, "workspaces").as((workspaces) =>
         workspaces
           .filter((ws) => !(ws.id >= -99 && ws.id <= -2)) // filter out special workspaces
@@ -39,33 +73,6 @@ function Workspaces() {
   );
 }
 
-function Wifi() {
-  const { wifi } = Network.get_default();
-
-  return (
-    <icon
-      tooltipText={bind(wifi, "ssid").as(String)}
-      className="Wifi space"
-      icon={bind(wifi, "iconName")}
-    />
-  );
-}
-
-function AudioSlider() {
-  const speaker = Wp.get_default()?.audio.defaultSpeaker!;
-
-  return (
-    <box className="AudioSlider" css="min-width: 140px">
-      <icon icon={bind(speaker, "volumeIcon")} />
-      <slider
-        hexpand
-        onDragged={({ value }) => (speaker.volume = value)}
-        value={bind(speaker, "volume")}
-      />
-    </box>
-  );
-}
-
 function Time({ format = "%H:%M - %A %e" }) {
   const time = Variable<string>("").poll(
     1000,
@@ -73,14 +80,18 @@ function Time({ format = "%H:%M - %A %e" }) {
   );
 
   return (
-    <label className="Time" onDestroy={() => time.drop()} label={time()} />
+    <label
+      className="Time space"
+      onDestroy={() => time.drop()}
+      label={time()}
+    />
   );
 }
 function Media() {
   const mpris = Mpris.get_default();
 
   return (
-    <box className="Media">
+    <box className="Media fademedia">
       {bind(mpris, "players").as((ps) =>
         ps[0] ? (
           <box>
@@ -118,7 +129,7 @@ function BatteryLevel() {
   );
 }
 
-export default function Bar(monitor: Gdk.Monitor) {
+export default function Bar(monitor: Gdk.Monitor, bagsType: "pc" | "portable") {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;
   return (
     <window
@@ -129,16 +140,33 @@ export default function Bar(monitor: Gdk.Monitor) {
     >
       <centerbox>
         <box hexpand halign={Gtk.Align.START}>
-          <Time />
-          <Wifi />
+          {bagsType === "portable" ? <Time /> : <Media />}
+          {bagsType === "portable" ? <Wifi /> : <></>}
         </box>
         <box>
-          <MultiBox />
+          <></>
+          {bagsType === "portable" ? <MultiBox /> : <Workspaces />}
         </box>
         <box hexpand halign={Gtk.Align.END}>
-          <BatteryLevel />
+          {bagsType === "portable" ? <BatteryLevel /> : <Time />}
+          <SystemTray />
         </box>
       </centerbox>
     </window>
   );
 }
+
+// function AudioSlider() {
+//   const speaker = Wp.get_default()?.audio.defaultSpeaker!;
+
+//   return (
+//     <box className="AudioSlider" css="min-width: 140px">
+//       <icon icon={bind(speaker, "volumeIcon")} />
+//       <slider
+//         hexpand
+//         onDragged={({ value }) => (speaker.volume = value)}
+//         value={bind(speaker, "volume")}
+//       />
+//     </box>
+//   );
+// }
