@@ -4,9 +4,6 @@
     ./hardware-configuration.nix
     ../../global.nix
   ];
-  environment.variables = {
-    BAGS_TYPE = "portable";
-  };
   boot = {
     loader = {
       efi.canTouchEfiVariables = true;
@@ -14,13 +11,20 @@
     };
   };
   networking.hostName = "nix-portable";
-  programs.bash.shellAliases = {
-    wifi = "nmtui";
-  };
   # networking.firewall = {
   #   allowedTCPPorts = [1701 9001];
   # };
+  programs.bash.shellAliases = {
+    wifi = "nmtui";
+  };
+
   hardware = {
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        intel-media-driver
+      ];
+    };
     xone.enable = true;
     bluetooth = {
       enable = true;
@@ -33,6 +37,18 @@
     enableAllFirmware = true;
   };
   services = {
+    openssh = {
+      enable = true;
+      openFirewall = false;
+      hostKeys = [
+        {
+          comment = "nix-portable";
+          path = "/home/barab/.ssh/pc_ed25519";
+          rounds = 100;
+          type = "ed25519";
+        }
+      ];
+    };
     libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
     blueman.enable = true; # GUI Bluetooth manager
     ollama = {
@@ -40,9 +56,18 @@
       loadModels = ["gemma3:1b"];
     };
   };
-  environment.systemPackages = with pkgs; [
-    moonlight-qt
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      moonlight-qt
+      brightnessctl
+      wakelan
+    ];
+    variables = {
+      BAGS_TYPE = "portable";
+    };
+    sessionVariables = {LIBVA_DRIVER_NAME = "iHD";};
+  };
+
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.

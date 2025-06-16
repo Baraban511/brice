@@ -7,8 +7,45 @@
   environment.variables = {
     BAGS_TYPE = "pc";
   };
-  networking.hostName = "nix-pc";
+  networking = {
+    hostName = "nix-pc";
+  };
+  users.users.barab.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG9E0eLPf83egy9vJdwO01w7P9oIGsWRN2Sx/2mrdwQu nix-portable"
+  ];
   services = {
+    openssh = {
+      enable = true;
+      ports = [22];
+      startWhenNeeded = true;
+      banner = "Hi there...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                                                %%
+%%                                                                                                %%
+%%                                                                                                %%
+%%   %%%%%%%%%%%           %%%%       %%%%%%%%%%%          %%%%        %%%%%%%%%%%                %%
+%%   %%%%%%%%%%%%%         %%%%       %%%%%%%%%%%%%        %%%%        %%%%%%%%%%%%               %%
+%%   %%%       %%%%       %%%%%%      %%%%      %%%%      %%%%%%       %%%       %%%              %%
+%%   %%%       %%%%       %%%%%%%     %%%%      %%%%      %%%%%%%      %%%       %%%              %%
+%%   %%%      %%%%       %%%  %%%     %%%%      %%%%     %%%  %%%      %%%     %%%%%              %%
+%%   %%%%%%%%%%%%%%     %%%%  %%%%    %%%%      %%%%    %%%%  %%%%     %%%%%%%%%%%%%              %%
+%%   %%%       %%%%%    %%%    %%%    %%%%%%%%%%%%%     %%%    %%%     %%%       %%%%%            %%
+%%   %%%         %%%%  %%%%%%%%%%%%   %%%%%%%%%%%      %%%%%%%%%%%%    %%%         %%%            %%
+%%   %%%         %%%%  %%%%%%%%%%%%%  %%%%   %%%%      %%%%%%%%%%%%%   %%%         %%%            %%
+%%   %%%%%%%%%%%%%%%  %%%        %%%  %%%%     %%%    %%%        %%%   %%%%%%%%%%%%%%%   %%%%     %%
+%%   %%%%%%%%%%%%%%  %%%%        %%%% %%%%      %%%%  %%%        %%%%  %%%%%%%%%%%%%     %%%%     %%
+%%                                                                                                %%
+%%                                                                                                %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+";
+      settings = {
+        PasswordAuthentication = false;
+        AllowUsers = ["barab"];
+        UseDns = true;
+        PermitRootLogin = "no";
+      };
+    };
+    fail2ban.enable = true; # SSH brute-force protection
     blueman.enable = true; # GUI Bluetooth manager
     hardware.openrgb.enable = true;
     sunshine = {
@@ -18,6 +55,7 @@
       capSysAdmin = true;
     };
   };
+
   hardware = {
     bluetooth.enable = true; # Enable support for Bluetooth
     i2c.enable = true;
@@ -55,18 +93,16 @@
     hyperhdr
     catppuccin-grub
     ddcutil
+    sunshine
+    catppuccinifier-cli
     # In tests
     openrgb-with-all-plugins
     ledfx
     #ente-auth
-    catppuccinifier-cli
     zettlr
-    cliphist
     typst
-    rofi
-    wl-clipboard
     rclone
-    sunshine
+    postman
   ];
   # systemd.services.monitor-on = {
   #   description = "Allumer le moniteur via DDC/CI au démarrage";

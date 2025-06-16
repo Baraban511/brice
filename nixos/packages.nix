@@ -82,7 +82,6 @@
     hyprpolkitagent
     bun
     gh
-    brightnessctl
     # Screenshots
     grim
     swappy
@@ -113,6 +112,9 @@
     discord
     nodejs
     caligula
+    hyprls
+    waypipe
+    albert
   ];
 
   fonts = {

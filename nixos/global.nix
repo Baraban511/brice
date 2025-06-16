@@ -7,6 +7,7 @@
     linkHypr = "ln -s /home/barab/brice/config/hypr /home/barab/.config/";
     linkZed = "ln -s /home/barab/brice/config/zed /home/barab/.config/";
     linkFastfetch = "ln -s /home/barab/brice/config/fastfetch /home/barab/.config/";
+    linkAlbert = "ln -s /home/barab/brice/config/albert /home/barab/.config/";
   };
   networking = {
     networkmanager.enable = true; # Networkmanager for networking
@@ -20,7 +21,7 @@
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 30d";
+      options = "--delete-older-than 20d";
     };
     settings.experimental-features = ["nix-command" "flakes"]; # Enable flakes and New ClI
   };

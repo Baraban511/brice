@@ -29,11 +29,8 @@
     cloudflare-warp.enable = true;
     gvfs.enable = true; # For nautilus
     upower.enable = true; # For Astal battery
-
-    gnome.gnome-keyring.enable = true;
   };
-  security.pam.services.greetd.enableGnomeKeyring = true;
-
+  services.gnome.gnome-keyring.enable = true;
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 }

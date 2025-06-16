@@ -7,9 +7,9 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "git_status": true,
   "auto_update": false,
   "unnecessary_code_fade": 0.5,
-  "git_status": true,
   "toolbar": {
     "breadcrumbs": true,
     "quick_actions": true,

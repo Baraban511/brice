@@ -1,6 +1,6 @@
 # brice
 My Nixos configuration and ricing. It's a work in progress (forever i think).
-
+If you find any bugs or security issues, please reach out to me.
 ## Installation
 ```sudo nixos-rebuild switch --flake /home/barab/brice/```
 
@@ -8,6 +8,7 @@ My Nixos configuration and ricing. It's a work in progress (forever i think).
 My ags configuration.
 ```nix develop``` in /bags to jump in!
 ```ags types -d /home/barab/brice/bags/ -p``` to generate types.
+
 ```
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                                                                                %%
