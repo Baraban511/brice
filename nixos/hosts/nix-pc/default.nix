@@ -11,13 +11,21 @@
     hostName = "nix-pc";
   };
   users.users.barab.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG9E0eLPf83egy9vJdwO01w7P9oIGsWRN2Sx/2mrdwQu nix-portable"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOrL/2pJHSITUsLRLVP8yB31F5HCtlYtmc4NKl14CLM3 nix-portable"
   ];
   services = {
     openssh = {
       enable = true;
-      ports = [22];
+      openFirewall = true;
       startWhenNeeded = true;
+      hostKeys = [
+        {
+          comment = "nix pc";
+          path = "/etc/ssh/pc_host_ed25519_key";
+          rounds = 100;
+          type = "ed25519";
+        }
+      ];
       banner = "Hi there...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                                                                                %%
@@ -45,7 +53,9 @@
         PermitRootLogin = "no";
       };
     };
-    fail2ban.enable = true; # SSH brute-force protection
+    fail2ban = {
+      enable = true;
+    }; # SSH brute-force protection
     blueman.enable = true; # GUI Bluetooth manager
     hardware.openrgb.enable = true;
     sunshine = {
@@ -55,6 +65,9 @@
       capSysAdmin = true;
     };
   };
+  environment.etc."ssh/sshrc".text = ''
+    kdeconnect-cli -n "Nothing Phone 2a" --ping-msg "🔐 Connexion SSH Utilisateur $USER depuis $SSH_CONNECTION"
+  '';
 
   hardware = {
     bluetooth.enable = true; # Enable support for Bluetooth
@@ -85,7 +98,6 @@
   #     }
   #   ];
   # };
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -103,7 +115,22 @@
     typst
     rclone
     postman
+    # fuse
   ];
+  # systemd.services.onedrive-mount = {
+  #   description = "Mount OneDrive using rclone";
+  #   wantedBy = ["multi-user.target"];
+  #   serviceConfig.Type = "simple";
+  #   serviceConfig.User = "barab";
+  #   script = ''
+  #     mkdir -p /mnt/onedrive
+  #     ${pkgs.rclone}/bin/rclone mount onedrive:/ /mnt/onedrive \
+  #       --vfs-cache-mode full \
+  #       --daemon
+  #   '';
+  #   after = ["network.target"];
+  # };
+
   # systemd.services.monitor-on = {
   #   description = "Allumer le moniteur via DDC/CI au démarrage";
   #   wantedBy = ["multi-user.target"];
