@@ -5,6 +5,7 @@ import OSD from "./widget/OSD/App";
 import OSDStyles from "./widget/OSD/styles.scss";
 import Notif from "./widget/Notifications/App";
 import NotifStyles from "./widget/Notifications/styles.scss";
+// import Greeter from "./widget/Greeter/App";
 // import Applauncher from "./widget/AppLauncher/App";
 // import ApplauncherStyle from "./widget/AppLauncher/styles.scss";
 // import MediaPlayer from "./widget/MediaPlayer/App";
@@ -27,6 +28,13 @@ App.start({
     App.get_monitors().map(Notif);
   },
 });
+
+// App.start({
+//   instanceName: "greeter",
+//   main() {
+//     App.get_monitors().map(Greeter);
+//   },
+// });
 
 App.start({
   instanceName: "osd",

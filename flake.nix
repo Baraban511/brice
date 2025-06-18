@@ -35,9 +35,6 @@
       ];
     };
   in {
-    packages.${system} = {
-      bags = bags.packages.${system}.default;
-    };
     # NixOS configurations
     nixosConfigurations = {
       nix-pc = nixpkgs.lib.nixosSystem {

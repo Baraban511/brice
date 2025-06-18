@@ -40,14 +40,12 @@
     openssh = {
       enable = true;
       openFirewall = false;
-      hostKeys = [
-        {
-          comment = "nix-portable";
-          path = "/home/barab/.ssh/pc_ed25519";
-          rounds = 100;
-          type = "ed25519";
-        }
-      ];
+      knownHosts = {
+        nix-pc = {
+          hostNames = ["192.168.1.202"];
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO0GFQia1VGrSKwryR0S+aJDmEDBAN5z2uio5hltmkPn nix pc";
+        };
+      };
     };
     libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
     blueman.enable = true; # GUI Bluetooth manager

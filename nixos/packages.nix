@@ -113,7 +113,6 @@
     nodejs
     caligula
     hyprls
-    waypipe
     albert
   ];
 
