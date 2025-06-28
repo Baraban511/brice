@@ -6,16 +6,21 @@
     hyprlux = {
       url = "github:amadejkastelic/Hyprlux";
     };
-
-    ags = {
-      url = "github:aylur/ags";
+    agenix = {
+      url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.darwin.follows = ""; # Avoid darwin dependency
     };
+
+    # ags = {
+    #   url = "github:aylur/ags";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     bags = {
       url = "path:./bags";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.ags.follows = "ags"; # Assurez-vous que bags utilise le même ags
+      #inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.ags.follows = "ags"; # Assurez-vous que bags utilise le même ags
     };
   };
 
@@ -24,14 +29,21 @@
     nixpkgs,
     bags,
     hyprlux,
+    agenix,
     ...
   }: let
     system = "x86_64-linux";
+    extraModules = {
+      imports = [
+        agenix.nixosModules.default
+        hyprlux.nixosModules.default
+      ];
+    };
 
-    # Module commun pour inclure bags dans les deux configurations
-    bagsModule = {
+    extraPackages = {
       environment.systemPackages = [
-        bags.packages.${system}.default # Utilisez le package par défaut du flake bags
+        bags.packages.${system}.default
+        agenix.packages.${system}.default
       ];
     };
   in {
@@ -41,13 +53,12 @@
         system = "x86_64-linux";
         modules = [
           ./nixos/hosts/nix-pc
-          hyprlux.nixosModules.default
-          bagsModule
+          extraModules
+          extraPackages
           {
-            environment.etc."greetd/hyprland.conf".source = "${self}/config/greetd/hyprland.conf";
+            environment.etc."greetd".source = "${self}/config/greetd";
             environment.etc."gtk-3.0/settings.ini".source = "${self}/config/gtk-3.0.ini";
-            environment.etc."greetd/regreet.toml".source = "${self}/config/greetd/regreet.toml";
-            environment.etc."greetd/regreet.png".source = "${self}/wallpapers/regreet.png";
+            environment.etc."scripts".source = "${self}/scripts";
           }
         ];
       };
@@ -56,13 +67,13 @@
         system = "x86_64-linux";
         modules = [
           ./nixos/hosts/nix-portable
-          hyprlux.nixosModules.default
-          bagsModule
+          extraModules
+          extraPackages
           {
             environment.etc."greetd/hyprland.conf".source = "${self}/config/greetd/hyprland.conf";
             environment.etc."gtk-3.0/settings.ini".source = "${self}/config/gtk-3.0.ini";
             environment.etc."greetd/regreet.toml".source = "${self}/config/greetd/regreet.toml";
-            environment.etc."greetd/regreet.png".source = "${self}/wallpapers/regreet.png";
+            environment.etc."greetd/regreet.jpg".source = "${self}/wallpapers/unsplash.jpg";
           }
         ];
       };

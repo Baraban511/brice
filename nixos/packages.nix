@@ -24,7 +24,7 @@
         # Shell aliases
         zed = "zeditor";
         brice = "zeditor brice && exit";
-        rebuild = "sudo nixos-rebuild switch --flake /home/barab/brice/";
+        rebuild = "git -C /home/barab/brice add . && sudo nixos-rebuild switch --flake /home/barab/brice/";
         update = "nix flake update --flake /home/barab/brice && nix flake update --flake /home/barab/brice/bags && flatpak update --noninteractive";
       };
       interactiveShellInit = ''
@@ -74,46 +74,54 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    kitty # Terminal
-    nautilus # File manager
-    fastfetch
-    walker # Launcher
-    hyprpaper # Wallpaper utility
-    hyprpolkitagent
-    bun
-    gh
-    # Screenshots
+    ### Screenshots
     grim
     swappy
     slurp
-    wl-clipboard
-    gnome-themes-extra
-    bibata-cursors
-    greetd.regreet # reGreet
-    gnome-disk-utility
-    btop # Ressource monitor
-    nwg-look # GTK theme editor
-    rquickshare
-    localsend
-    rustup
-    gcc
+    gnome-frog
+    ### Development
+    bun
+    gh
     zed-editor-fhs
     alejandra # Nix formatter
     nixd
     nil
+    rustup
+    gcc
+    nodejs
+    hyprls
+    ### Needed
+    kitty # Terminal
+    hyprpaper # Wallpaper utility
+    hyprpolkitagent
+    nautilus # File manager
+    gnome-themes-extra
+    adwaita-icon-theme
+    bibata-cursors
+    greetd.regreet # reGreet
+    hyprlock
+    albert
+    imagemagick
+    jq
+    bc
+    curl
+    wl-clipboard
+    ### System helpers
+    rclone
+    fastfetch
+    btop # Ressource monitor
+    gnome-disk-utility
+    pavucontrol
+    nwg-look # GTK theme editor
+    caligula
+    ### Utilities
+    rquickshare
+    localsend
     chromium
     beeper
-    pavucontrol
-    kitty # Terminal
-    nautilus # File manager
-    fastfetch
-    hyprlock
     spotify
     discord
-    nodejs
-    caligula
-    hyprls
-    albert
+    vlc
   ];
 
   fonts = {
@@ -122,15 +130,16 @@
       material-design-icons
 
       # normal fonts
-      noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-emoji
-      fira-code
+      nerd-fonts.fira-code
+      nerd-fonts.noto
       fira-code-symbols
-    ];
+      adwaita-icon-theme
+    ]; # List fonts : convert -list font | grep -i mono
 
-    # use fonts specified by user rather than default ones
     enableDefaultPackages = false;
+    # fontconfig.useEmbeddedBitmaps = true; # Fix for firefox color emojis
 
     # user defined fonts
     # the reason there's Noto Color Emoji everywhere is to override DejaVu's

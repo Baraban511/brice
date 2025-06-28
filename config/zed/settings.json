@@ -31,45 +31,6 @@
       }
     }
   },
-  "agent": {
-    "default_profile": "ask",
-    "profiles": {
-      "write": {
-        "name": "Write",
-        "tools": {
-          "batch_tool": false,
-          "code_actions": false,
-          "code_symbols": false,
-          "contents": false,
-          "copy_path": false,
-          "create_file": true,
-          "delete_path": false,
-          "diagnostics": true,
-          "edit_file": true,
-          "fetch": true,
-          "list_directory": true,
-          "move_path": false,
-          "now": false,
-          "find_path": true,
-          "read_file": true,
-          "grep": true,
-          "rename": false,
-          "symbol_info": false,
-          "terminal": true,
-          "thinking": true,
-          "web_search": true,
-          "open": true
-        },
-        "enable_all_context_servers": true,
-        "context_servers": {}
-      }
-    },
-    "default_model": {
-      "provider": "copilot_chat",
-      "model": "claude-3.7-sonnet-thought"
-    },
-    "version": "2"
-  },
   "ui_font_size": 16,
   "buffer_font_size": 16,
   "theme": {
@@ -80,5 +41,13 @@
   },
   "features": {
     "edit_prediction_provider": "copilot"
+  },
+  "auto_install_extensions": {
+    "html": true,
+    "toml": true,
+    "wakatime": true,
+    "hyprlang": true,
+    "git-firefly": true,
+    "nix": true
   }
 }

@@ -1,13 +1,23 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./packages.nix
     ./services.nix
   ];
-  system.userActivationScripts = {
-    linkHypr = "ln -s /home/barab/brice/config/hypr /home/barab/.config/";
-    linkZed = "ln -s /home/barab/brice/config/zed /home/barab/.config/";
-    linkFastfetch = "ln -s /home/barab/brice/config/fastfetch /home/barab/.config/";
-    linkAlbert = "ln -s /home/barab/brice/config/albert /home/barab/.config/";
+  system = {
+    userActivationScripts = {
+      linkHypr = "ln -sfn /home/barab/brice/config/hypr /home/barab/.config/";
+      linkZed = "ln -sfn /home/barab/brice/config/zed /home/barab/.config/";
+      linkFastfetch = "ln -sfn /home/barab/brice/config/fastfetch /home/barab/.config/";
+      linkAlbert = "ln -sfn /home/barab/brice/config/albert /home/barab/.config/";
+      mkdirRclone = "mkdir -p /home/barab/rclone/Onedrive /home/barab/rclone/Cloudflare /home/barab/rclone/Freebox";
+    };
+    activationScripts = {
+      linkWallpaper = "ln -f /home/barab/brice/wallpapers/unsplash.jpg /etc/unsplash.jpg";
+    };
   };
   networking = {
     networkmanager.enable = true; # Networkmanager for networking
@@ -63,12 +73,15 @@
       "application/json" = "zed.desktop";
       "text/json" = "zed.desktop";
       "text/css" = "zed.desktop";
+      "text/html" = "zed.desktop";
+      "image/png" = "swappy";
+      "image/jpeg" = "swappy";
     };
   };
   qt = {
     enable = true;
     platformTheme = "gnome";
-    style = "adwaita";
+    style = "adwaita-dark";
   };
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.barab = {
@@ -76,6 +89,18 @@
     home = "/home/barab";
     extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
   };
+  age = {
+    identityPaths = ["/home/barab/.ssh/id_ed25519"];
+    secrets.unsplash = {
+      file = ../secrets/unsplash.age;
+      owner = "barab";
+    };
+    secrets.rclone = {
+      file = ../secrets/rclone.conf;
+      owner = "barab";
+    };
+  };
+
   environment = {
     sessionVariables.NIXOS_OZONE_WL = "1"; # Hint Electron apps to use Wayland
     variables = {
@@ -85,6 +110,8 @@
       EDITOR = "zeditor --wait";
       KITTY_CONFIG_DIRECTORY = "/home/barab/brice/config";
       XDG_SESSION_DESKTOP = "Hyprland";
+      UNSPLASH_API_KEY = config.age.secrets.unsplash.path;
+      RCLONE_CONFIG = config.age.secrets.rclone.path;
     };
   };
 }

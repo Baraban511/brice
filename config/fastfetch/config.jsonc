@@ -3,7 +3,6 @@
   "logo": {
     "type": "file",
     "source": "/home/barab/brice/config/fastfetch/logo.txt",
-    "padding": { "top": 1 },
   },
   "modules": [
     {

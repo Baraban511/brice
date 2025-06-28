@@ -1,11 +1,19 @@
 [background]
 # Path to the background image
-path = "/etc/greetd/regreet.png"
+path = "/etc/unsplash.jpg"
 [GTK]
 # Whether to use the dark theme
 application_prefer_dark_theme = true
 cursor_theme_name = "Bibata-Modern-Classic"
 [appearance]
-greeting_msg = "Re"
+greeting_msg = ""
 [env]
 XCURSOR_SIZE = "16"
+
+[widget.clock]
+# strftime format argument
+# See https://docs.rs/jiff/0.1.14/jiff/fmt/strtime/index.html#conversion-specifications
+format = "%H:%M"
+
+# How often to update the text
+resolution = "1000ms"
