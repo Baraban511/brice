@@ -3,35 +3,34 @@
 $bg: #212223;
 $fg: #f1f1f1;
 $accent: #378df7;
-$radius: 15px;
-
+$radius: 6px;
+$gaps_out: 5px;
 window.Bar {
-    centerbox {
-        margin: 0 5px;
-    }
-    .space {
-        margin: 3px;
-        padding: 3px;
-        border-radius: 6px;
-    }
-    box-shadow: none;
-    color: $fg;
-    font-size: 1.1em;
     font-weight: bold;
-    label {
-        margin: 0 1px;
+    font-size: 1.1em;
+    box {
+        margin: 2 5 0 5px;
     }
-
-    .fademedia {
+    .opaque-box {
         background-color: $bg;
-        margin: 3px;
-        padding: 3px;
-        border-radius: 6px;
+        border-radius: $radius;
     }
-    .FocusedClient {
-        color: $accent;
+    label {
+        padding: 2 5px;
     }
-
+    button {
+        all: unset;
+        transition: 300ms;
+        background-color: $bg;
+        border-radius: $radius;
+        padding: 3 6px;
+    }
+    button:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    button:active {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
     .Media .Cover {
         min-height: 1.2em;
         min-width: 1.2em;
@@ -40,61 +39,17 @@ window.Bar {
         border-radius: 3px;
     }
 
-    .AudioSlider {
-        * {
-            all: unset;
-        }
-
-        icon {
-            margin-right: 0.6em;
-        }
-
-        & {
-            margin: 0 1em;
-        }
-
-        trough {
-            background-color: color.adjust($fg, $alpha: -0.8);
-            border-radius: $radius;
-        }
-
-        highlight {
-            background-color: $accent;
-            min-height: 0.8em;
-            border-radius: $radius;
-        }
-
-        slider {
-            background-color: $fg;
-            border-radius: $radius;
-            min-height: 1em;
-            min-width: 1em;
-            margin: -0.2em;
-        }
-    }
     .Workspaces {
-        button {
-            all: unset;
-            background-color: transparent;
-
-            &:hover label {
-                background-color: color.adjust($fg, $alpha: -0.8);
-            }
-
-            &:active label {
-                background-color: color.adjust($fg, $alpha: -0.8);
-            }
-        }
         label {
-            transition: 200ms;
-            border-radius: 5px;
-            padding-left: 10px;
-            padding-right: 10px;
+            transition: 300ms;
         }
 
         .focused label {
             color: $accent;
             border-color: $accent;
         }
+    }
+    .tray-item {
+        margin-left: 5px;
     }
 }

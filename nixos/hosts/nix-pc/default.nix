@@ -51,6 +51,8 @@
         AllowUsers = ["barab"];
         UseDns = true;
         PermitRootLogin = "no";
+        PrintMotd = true;
+        KbdInteractiveAuthentication = false;
       };
     };
     fail2ban = {
@@ -65,8 +67,9 @@
       capSysAdmin = true;
     };
   };
+  users.motd = "\n\n Welcome back! (I hope)\n\n";
   environment.etc."ssh/sshrc".text = ''
-    kdeconnect-cli -n "Nothing Phone 2a" --ping-msg "🔐 Connexion SSH Utilisateur $USER depuis $SSH_CONNECTION"
+    kdeconnect-cli -n "Nothing Phone 2a" --ping-msg "🔐 Connexion SSH sur $USER depuis $SSH_CONNECTION"
   '';
 
   hardware = {
@@ -110,12 +113,13 @@
     # In tests
     openrgb-with-all-plugins
     ledfx
-    #ente-auth
+    ente-auth
     zettlr
     typst
-    rclone
-    postman
-    # fuse
+    #postman
+    bitwarden
+    obsidian
+    shotcut
   ];
   # systemd.services.onedrive-mount = {
   #   description = "Mount OneDrive using rclone";
