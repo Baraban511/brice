@@ -17,7 +17,10 @@
   programs.bash.shellAliases = {
     wifi = "nmtui";
   };
-
+  powerManagement = {
+    enable = true;
+    powertop.enable = true;
+  };
   hardware = {
     graphics = {
       enable = true;

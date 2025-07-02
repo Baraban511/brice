@@ -7,9 +7,9 @@ If you find any bugs or security issues, please reach out to me.
 # bags
 My ags configuration.
 ```cd bags && nix develop``` to jump in!
-```ags types -d /home/barab/brice/bags/ -p``` to generate types.
+```ags types -d /home/barab/brice/bags/ ``` to generate types.
 
-# Secrets
+## Secrets
 Secrets are handled by [agenix](https://github.com/ryantm/agenix)
 
 ```

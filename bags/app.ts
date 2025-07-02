@@ -1,53 +1,27 @@
-// import Applauncher from "./widget/AppLauncher/App";
-// import ApplauncherStyle from "./widget/AppLauncher/styles.scss";
-// import MediaPlayer from "./widget/MediaPlayer/App";
-// import MediaPlayerStyle from "./widget/MediaPlayer/styles.scss";
+import app from "ags/gtk4/app";
+import BarStyles from "./widgets/Bar/style.scss";
+import Bar from "./widgets/Bar/App";
+import Notification from "./widgets/Notification/App";
+import NotificationStyles from "./widgets/Notification/styles.scss";
 import GLib from "gi://GLib";
-import { App } from "astal/gtk3";
-import Bar from "./widget/Bar/App";
-import BarStyles from "./widget/Bar/style.scss";
-import Notif from "./widget/Notifications/App";
-import NotifStyles from "./widget/Notifications/styles.scss";
-// import OSD from "./widget/OSD/App";
-// import OSDStyles from "./widget/OSD/styles.scss";
 
 const env = GLib.getenv("BAGS_TYPE");
 const BAGS_TYPE: "pc" | "portable" = env === "portable" ? "portable" : "pc";
 
-App.start({
-	instanceName: "bar",
-	css: BarStyles,
-	main() {
-		App.get_monitors().map((monitor) => Bar(monitor, BAGS_TYPE));
-	},
+app.start({
+  instanceName: "bags",
+  css: BarStyles,
+  icons: `/home/barab/brice/bags/icons`,
+
+  main() {
+    app.get_monitors().map((monitor) => Bar(monitor, BAGS_TYPE));
+  },
 });
 
-App.start({
-	instanceName: "notifications",
-	css: NotifStyles,
-	main() {
-		App.get_monitors().map(Notif);
-	},
+app.start({
+  instanceName: "notification",
+  css: NotificationStyles,
+  main() {
+    app.get_monitors().map(Notification);
+  },
 });
-
-// App.start({
-// 	instanceName: "osd",
-// 	css: OSDStyles,
-// 	main() {
-// 		App.get_monitors().map(OSD);
-// 	},
-// });
-
-// App.start({
-//   instanceName: "launcher",
-//   css: ApplauncherStyle,
-//   main: Applauncher,
-// });
-
-// App.start({
-//   instanceName: "players",
-//   css: MediaPlayerStyle,
-//   main: () => {
-//     new Widget.Window({}, MediaPlayer());
-//   },
-// });
