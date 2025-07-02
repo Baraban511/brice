@@ -45,7 +45,7 @@
       openFirewall = false;
       knownHosts = {
         nix-pc = {
-          hostNames = ["192.168.1.202"];
+          hostNames = ["192.168.1.202" "100.96.0.1"];
           publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO0GFQia1VGrSKwryR0S+aJDmEDBAN5z2uio5hltmkPn nix pc";
         };
       };
@@ -61,7 +61,6 @@
     systemPackages = with pkgs; [
       moonlight-qt
       brightnessctl
-      wakelan
     ];
     variables = {
       BAGS_TYPE = "portable";
