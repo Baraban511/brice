@@ -17,6 +17,7 @@ window.bar {
     image {
         padding: 3px 6px;
         color: white;
+        border-radius: 3px;
     }
     popover {
         arrow,
@@ -47,13 +48,6 @@ window.bar {
     }
     button:active {
         background-color: rgba(0, 0, 0, 0.2);
-    }
-    .Media .Cover {
-        min-height: 1.2em;
-        min-width: 1.2em;
-        background-position: center;
-        background-size: contain;
-        border-radius: 3px;
     }
 
     .Workspaces {

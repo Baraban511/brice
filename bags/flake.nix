@@ -31,6 +31,7 @@
       notifd
       tray
       apps
+      powerprofiles
     ];
 
     extraPackages =
