@@ -27,6 +27,7 @@
       extraPackages = with pkgs; [
         intel-media-driver
         vaapiIntel
+        vpl-gpu-rt
       ];
     };
     xone.enable = true;
@@ -53,18 +54,16 @@
     };
     libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
     blueman.enable = true; # GUI Bluetooth manager
-    ollama = {
-      enable = true;
-      loadModels = ["gemma3:1b"];
-    };
   };
   environment = {
     systemPackages = with pkgs; [
       moonlight-qt
       brightnessctl
+      prismlauncher
     ];
     variables = {
       BAGS_TYPE = "portable";
+      SWWW_TRANSITION_FPS = "60";
     };
     sessionVariables = {LIBVA_DRIVER_NAME = "iHD";};
   };

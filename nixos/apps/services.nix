@@ -1,4 +1,4 @@
-{
+{...}: {
   services = {
     greetd = {
       enable = true;
@@ -31,6 +31,4 @@
     upower.enable = true; # For Astal battery
   };
   services.gnome.gnome-keyring.enable = true;
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 }

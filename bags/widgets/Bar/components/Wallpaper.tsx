@@ -10,10 +10,13 @@ export default function Wallpaper() {
 }
 function reloadWallpaper() {
   exec([
-    "hyprctl",
-    "hyprpaper",
-    "reload",
-    ",/home/barab/brice/wallpapers/unsplash.jpg",
+    "swww",
+    "img",
+    "/home/barab/brice/wallpapers/unsplash.jpg",
+    "--transition-type",
+    "grow",
+    "--transition-pos",
+    "top-left",
   ]);
   exec("/home/barab/brice/scripts/unsplash.sh");
 }

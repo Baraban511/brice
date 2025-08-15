@@ -9,6 +9,7 @@ cursor_theme_name = "Bibata-Modern-Classic"
 greeting_msg = ""
 [env]
 XCURSOR_SIZE = "16"
+STATE_DIR = "/etc/regreet/cache.toml"
 
 [widget.clock]
 # strftime format argument
