@@ -1,7 +1,7 @@
 #!/run/current-system/sw/bin/bash
 
 # === Config ===
-DEST_DIR="/home/barab/brice/wallpapers"
+DEST_DIR="/home/barab/.config/brice"
 UNSPLASH_COLLECTION_ID="_A6eGnQBtvQ"    # Unsplash Collection ID
 
 mkdir -p "$DEST_DIR"
@@ -9,7 +9,12 @@ mkdir -p "$DEST_DIR"
 response=$(curl -s "https://api.unsplash.com/photos/random?orientation=landscape&collections=$UNSPLASH_COLLECTION_ID&client_id=$(cat "$UNSPLASH_API_KEY")")
 
 if [[ -z "$response" ]]; then
-    echo "Erreur : réponse vide de l'API"
+    echo "Error: Empty API response"
+    exit 1
+fi
+
+if [[ "$response" == "Rate Limit Exceeded" ]]; then
+    echo "Error: Rate limit exceeded"
     exit 1
 fi
 
@@ -18,7 +23,7 @@ image_url=$(echo "$response" | jq -r '.urls.raw')
 
 # URL check
 if [[ $image_url == "null" || -z $image_url ]]; then
-    echo "Erreur : Impossible de récupérer l'URL de l'image"
+    echo "Error: Can't fetch image's URL"
     exit 1
 fi
 
@@ -41,7 +46,7 @@ else
     color="rgba(255,255,255,0.7)"
 fi
 
-echo "Luminosité : $LUM_INT, Couleur choisie : $color"
+echo "Luminosity : $LUM_INT, Chosen color : $color"
 
 
 magick $filename \
@@ -49,7 +54,7 @@ magick $filename \
   -fill "$color" \
   -font "Noto-Sans-Mono-CJK-SC-Medium" \
   -pointsize 32 \
-  -annotate +12+40 "Photo by $photographer on Unsplash" \
+  -annotate +12+40 "Picture by $photographer on Unsplash" \
   $filename
 
 if [[ "$location" != "null" ]]; then
@@ -65,8 +70,8 @@ fi
 
 # Final check
 if [[ -f "$filename" ]]; then
-    echo "Image téléchargée avec succès : $filename"
+    echo "Sucess: $filename"
 else
-    echo "Erreur : téléchargement échoué"
+    echo "Error: Download failed"
     exit 1
 fi

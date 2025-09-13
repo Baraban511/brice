@@ -9,7 +9,6 @@ cursor_theme_name = "Bibata-Modern-Classic"
 greeting_msg = ""
 [env]
 XCURSOR_SIZE = "16"
-
 [widget.clock]
 # strftime format argument
 # See https://docs.rs/jiff/0.1.14/jiff/fmt/strtime/index.html#conversion-specifications

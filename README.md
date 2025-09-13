@@ -4,13 +4,13 @@ If you find any bugs or security issues, please reach out to me.
 ## Installation
 ```sudo nixos-generate-config --show-hardware-config```
 ```sudo nixos-rebuild switch --flake /home/barab/brice/```
+For it to work, you need an [Unsplash api key](https://unsplash.com/developers).
+## Secrets
+Secrets are handled by [agenix](https://github.com/ryantm/agenix)
 # bags
 My ags configuration.
 ```cd bags && nix develop``` to jump in!
-```ags types -d /home/barab/brice/bags/ ``` to generate types.
-
-## Secrets
-Secrets are handled by [agenix](https://github.com/ryantm/agenix)
+```ags types -d /home/barab/brice/bags/``` to generate types.
 
 ```
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

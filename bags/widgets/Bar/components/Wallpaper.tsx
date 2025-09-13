@@ -1,4 +1,5 @@
 import { exec } from "ags/process";
+
 export default function Wallpaper() {
   return (
     <box class="margin-x">
@@ -9,11 +10,29 @@ export default function Wallpaper() {
   );
 }
 function reloadWallpaper() {
-  exec([
-    "hyprctl",
-    "hyprpaper",
-    "reload",
-    ",/home/barab/brice/wallpapers/unsplash.jpg",
-  ]);
-  exec("/home/barab/brice/scripts/unsplash.sh");
+  async function setUnsplashWallpaper() {
+    exec([
+      "wallust",
+      "run",
+      "/home/barab/.config/brice/unsplash.jpg",
+      "-C",
+      "/home/barab/brice/config/wallust/wallust.toml",
+    ]);
+    exec([
+      "swww",
+      "img",
+      "/home/barab/.config/brice/unsplash.jpg",
+      "--transition-type",
+      "grow",
+      "--transition-pos",
+      "top-left",
+    ]);
+  }
+  setUnsplashWallpaper()
+    .then(() => {
+      exec("/home/barab/brice/scripts/unsplash.sh");
+    })
+    .catch((err) => {
+      console.error("Failed to set wallpaper:", err);
+    });
 }

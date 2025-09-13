@@ -1,8 +1,8 @@
 import { Gtk } from "ags/gtk4";
 import { createBinding } from "ags";
-
 import AstalBattery from "gi://AstalBattery";
 import AstalPowerProfiles from "gi://AstalPowerProfiles";
+
 export default function Battery() {
   const battery = AstalBattery.get_default();
   const powerprofiles = AstalPowerProfiles.get_default();

@@ -12,10 +12,8 @@
     "default_model": {
       "provider": "copilot_chat",
       "model": "gpt-4.1"
-    },
-    "version": "2"
+    }
   },
-  "git_status": true,
   "auto_update": false,
   "unnecessary_code_fade": 0.5,
   "toolbar": {
@@ -43,7 +41,6 @@
   "buffer_font_size": 16,
   "theme": {
     "mode": "dark",
-    "main": "One Dark",
     "light": "One Light",
     "dark": "One Dark"
   },

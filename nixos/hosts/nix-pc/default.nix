@@ -6,45 +6,14 @@
   ];
   environment.variables = {
     BAGS_TYPE = "pc";
+    SWWW_TRANSITION_FPS = "165"; # Yeees my screen is 165hz (but my GPU hates it)
   };
   networking = {
     hostName = "nix-pc";
   };
-  boot.initrd.kernelModules = ["amdgpu"];
-  users.defaultUserShell = pkgs.zsh;
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
+  boot.initrd.kernelModules = ["amdgpu"]; # Red team always
 
-    ohMyZsh = {
-      enable = true;
-      plugins = [
-        "git"
-        "z"
-      ];
-      theme = "robbyrussell";
-    };
-    interactiveShellInit = ''
-      if [[ -z $WAYLAND_DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-        exec Hyprland
-      fi
-    '';
-    shellAliases = {
-      zed = "zeditor";
-      brice = "zeditor brice && exit";
-      rebuild = "git -C /home/barab/brice add . && sudo nixos-rebuild switch --flake /home/barab/brice/";
-      update = "nix flake update --flake /home/barab/brice && nix flake update --flake /home/barab/brice/bags && flatpak update --noninteractive";
-    };
-
-    histSize = 10000;
-    histFile = "$HOME/.zsh_history";
-    setOptions = [
-      "HIST_IGNORE_ALL_DUPS"
-    ];
-  };
-
+  power.ups.mode = "standalone";
   users.users.barab.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOrL/2pJHSITUsLRLVP8yB31F5HCtlYtmc4NKl14CLM3 nix-portable"
   ];
@@ -110,8 +79,11 @@
   hardware = {
     bluetooth.enable = true; # Enable support for Bluetooth
     i2c.enable = true;
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
   };
-  virtualisation.waydroid.enable = true;
   boot.loader = {
     grub = {
       enable = true;
@@ -153,8 +125,8 @@
     typst
     #postman
     bitwarden
-    obsidian
     shotcut
+    spotify-player
   ];
   # systemd.services.onedrive-mount = {
   #   description = "Mount OneDrive using rclone";

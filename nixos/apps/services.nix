@@ -1,5 +1,6 @@
-{
+{...}: {
   services = {
+    hypridle.enable = true;
     greetd = {
       enable = true;
       settings = {
@@ -31,6 +32,4 @@
     upower.enable = true; # For Astal battery
   };
   services.gnome.gnome-keyring.enable = true;
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 }

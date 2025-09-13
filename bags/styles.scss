@@ -1,24 +1,86 @@
+@use "sass:color";
 @use "sass:string";
-
 @function gtkalpha($c, $a) {
     @return string.unquote("alpha(#{$c},#{$a})");
 }
-
-// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
-$fg-color: #{"@theme_fg_color"};
-$bg-color: #{"@theme_bg_color"};
+$bg: #212223;
+$fg: #f1f1f1;
+$accent: #378df7;
+$radius: 6px;
 $error: red;
+.Bar {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin: 5px 2px 0px 2px;
+    .margin-x {
+        margin: 0px 5px;
+    }
+    .padding-y {
+        padding: 5px 0px;
+    }
+    image {
+        padding: 3px 6px;
+        color: white;
+        border-radius: 3px;
+    }
+    popover {
+        all: unset;
+        arrow,
+        contents {
+            background-color: $bg;
+            color: $fg;
+        }
 
-window.NotificationPopups {
+        button {
+        }
+    }
+
+    label {
+        padding: 2px 5px;
+    }
+    .opaque {
+        background-color: $bg;
+        border-radius: $radius;
+    }
+    button {
+        all: unset;
+        transition: 300ms;
+        background-color: $bg;
+        border-radius: $radius;
+    }
+    button:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    button:active {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .Workspaces {
+        label {
+            transition: 300ms;
+            padding: 2px 10px;
+        }
+
+        .focused label {
+            color: $accent;
+            border-color: $accent;
+        }
+    }
+    .tray-item {
+        margin-left: 3px;
+    }
+}
+
+.NotificationPopups {
     all: unset;
 }
 
 .Notification {
     border-radius: 13px;
-    background-color: $bg-color;
+    background-color: $bg;
     margin: 0.5rem 1rem 0.5rem 1rem;
     box-shadow: 2px 3px 8px 0 gtkalpha(black, 0.4);
-    border: 1pt solid gtkalpha($fg-color, 0.03);
+    border: 1pt solid gtkalpha($fg, 0.03);
 
     &.critical {
         border: 1pt solid gtkalpha($error, 0.4);
@@ -36,7 +98,7 @@ window.NotificationPopups {
 
     .header {
         padding: 0.5rem;
-        color: gtkalpha($fg-color, 0.5);
+        color: gtkalpha($fg, 0.5);
 
         .app-icon {
             margin: 0 0.4rem;
@@ -64,7 +126,7 @@ window.NotificationPopups {
 
     separator {
         margin: 0 0.4rem;
-        background-color: gtkalpha($fg-color, 0.1);
+        background-color: gtkalpha($fg, 0.1);
     }
 
     .content {
@@ -73,15 +135,15 @@ window.NotificationPopups {
 
         .summary {
             font-size: 1.2em;
-            color: $fg-color;
+            color: $fg;
         }
 
         .body {
-            color: gtkalpha($fg-color, 0.8);
+            color: gtkalpha($fg, 0.8);
         }
 
         .image {
-            border: 1px solid gtkalpha($fg-color, 0.02);
+            border: 1px solid gtkalpha($fg, 0.02);
             margin-right: 0.5rem;
             border-radius: 9px;
             min-width: 100px;

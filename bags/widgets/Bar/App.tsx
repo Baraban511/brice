@@ -1,8 +1,8 @@
 import app from "ags/gtk4/app";
 import { Astal, Gdk } from "ags/gtk4";
-import { createBinding, With } from "ags";
 import AstalMpris from "gi://AstalMpris";
 
+import { With, createBinding, onCleanup } from "ags";
 import Media from "./components/Media";
 import Workspaces from "./components/Workspaces";
 import Wallpaper from "./components/Wallpaper";
@@ -11,42 +11,36 @@ import Battery from "./components/Battery";
 import Wireless from "./components/Wireless";
 import Tray from "./components/Tray";
 
-//Widget for CF Warp status
-
-// function BatteryLevel() {
-//   const bat = Battery.get_default();
-//   const percentage = createBinding(bat, "percentage");
-//   return (
-//     <box class="opaque" visible={createBinding(bat, "isPresent")}>
-//       <image iconName={createBinding(bat, "batteryIconName")} />
-//       <With value={percentage}>
-//         {(percentage) => <label label={`${Math.floor(percentage * 100)}%`} />}
-//       </With>
-//     </box>
-//   );
-// }
-
 function MultiBox() {
   const mpris = AstalMpris.get_default();
   const players = createBinding(mpris, "players");
   return (
     <With value={players}>
-      {(players) => (players[0] ? <Media /> : <Workspaces />)}
+      {(players) => (players ? <Media /> : <Workspaces />)}
     </With>
   );
 }
 
 export default function Bar(
-  gdkmonitor: Gdk.Monitor,
+  { gdkmonitor }: { gdkmonitor: Gdk.Monitor },
   bagsType: "pc" | "portable",
 ) {
+  let win: Astal.Window;
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;
+
+  onCleanup(() => {
+    // Root components (windows) are not automatically destroyed.
+    // When the monitor is disconnected from the system, this callback
+    // is run from the parent <For> which allows us to destroy the window
+    win.destroy();
+  });
 
   return (
     <window
       visible
-      name="bar"
-      class="bar"
+      namespace="bar"
+      class="Bar"
+      name={`bar-${gdkmonitor.connector}`}
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       anchor={TOP | LEFT | RIGHT}
