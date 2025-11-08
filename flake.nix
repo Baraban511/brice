@@ -33,7 +33,7 @@
     # NixOS configurations
     nixosConfigurations = {
       nix-pc = nixpkgs.lib.nixosSystem {
-        stdenv.hostPlatform.system = "x86_64-linux";
+        system = "x86_64-linux";
         modules = [
           ./nixos/hosts/nix-pc
           extraApps
@@ -41,7 +41,7 @@
       };
 
       nix-portable = nixpkgs.lib.nixosSystem {
-        stdenv.hostPlatform.system = "x86_64-linux";
+        system = "x86_64-linux";
         modules = [
           ./nixos/hosts/nix-portable
           extraApps
