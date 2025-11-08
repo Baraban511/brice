@@ -1,3 +1,2 @@
-# AGS
-node_modules/
-@girs/
+# quickshell
+.qmlls.ini

@@ -10,7 +10,7 @@
       regreetState = "mkdir -p /var/lib/regreet && touch 'last_user = \"barab\"\n[user_to_last_sess]\nbarab = \"Hyprland\"' > /var/lib/regreet/state.toml";
     };
     activationScripts = {
-      linkWallpaper = "ln -f /home/barab/brice/.config/brice/unsplash.png /etc/unsplash.jpg";
+      linkWallpaper = "ln -f /home/barab/.config/brice/unsplash.jpg /etc/unsplash.jpg";
     };
   };
   systemd.tmpfiles.rules = [

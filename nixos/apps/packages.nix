@@ -2,6 +2,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    kdePackages.qtdeclarative
+    quickshell
+    openssl
     ### Screenshots
     grim
     swappy
@@ -52,6 +55,7 @@
     joplin-desktop
     ente-auth
     wallust
+    bitwarden-desktop
   ];
 
   fonts = {
@@ -67,10 +71,10 @@
       dejavu_fonts
       liberation_ttf
       source-code-pro
-      ubuntu_font_family
+      ubuntu-classic
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
     ];
 
     # (optionnel) forcer une police par défaut dans le système

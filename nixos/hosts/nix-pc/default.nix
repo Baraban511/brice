@@ -92,7 +92,7 @@
       useOSProber = true; # Active la détection automatique des autres systèmes
       default = "2";
       theme = "${pkgs.catppuccin-grub}";
-      splashImage = "/home/barab/brice/wallpapers/boot.png";
+      splashImage = "/home/barab/brice/assets/boot.png";
     };
     timeout = 10;
     efi.canTouchEfiVariables = true;
@@ -123,8 +123,6 @@
     ente-auth
     zettlr
     typst
-    #postman
-    bitwarden
     shotcut
     spotify-player
   ];
