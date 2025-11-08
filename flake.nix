@@ -11,14 +11,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.darwin.follows = ""; # Avoid darwin dependency
     };
-    bags = {
-      url = "path:./bags";
-    };
   };
 
   outputs = {
     nixpkgs,
-    bags,
     hyprlux,
     agenix,
     ...
@@ -30,7 +26,6 @@
         hyprlux.nixosModules.default
       ];
       environment.systemPackages = [
-        bags.packages.${system}.default
         agenix.packages.${system}.default
       ];
     };
@@ -38,7 +33,7 @@
     # NixOS configurations
     nixosConfigurations = {
       nix-pc = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        stdenv.hostPlatform.system = "x86_64-linux";
         modules = [
           ./nixos/hosts/nix-pc
           extraApps
@@ -46,7 +41,7 @@
       };
 
       nix-portable = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        stdenv.hostPlatform.system = "x86_64-linux";
         modules = [
           ./nixos/hosts/nix-portable
           extraApps
