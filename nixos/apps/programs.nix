@@ -9,7 +9,7 @@
         zed = "zeditor";
         brice = "zeditor brice && exit";
         rebuild = "git -C /home/barab/brice add . && sudo nixos-rebuild switch --flake /home/barab/brice/";
-        update = "nix flake update --flake /home/barab/brice && nix flake update --flake /home/barab/brice/bags && flatpak update --noninteractive";
+        update = "nix flake update --flake /home/barab/brice && flatpak update --noninteractive";
       };
 
       histSize = 1000;
