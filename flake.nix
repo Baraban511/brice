@@ -3,9 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    hyprlux = {
-      url = "github:amadejkastelic/Hyprlux";
-    };
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,7 +12,6 @@
 
   outputs = {
     nixpkgs,
-    hyprlux,
     agenix,
     ...
   }: let
@@ -23,7 +19,6 @@
     extraApps = {
       imports = [
         agenix.nixosModules.default
-        hyprlux.nixosModules.default
       ];
       environment.systemPackages = [
         agenix.packages.${system}.default

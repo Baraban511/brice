@@ -19,7 +19,7 @@
       // NewExt "decentraleyes" "jid1-BoFifL9Vbdl2zQ@jetpack"
       // NewExt "bitwarden-password-manager" "{446900e4-71c2-419f-a6a7-df9c091e268b}"
       // NewExt "svg-gobbler" "{7962ff4a-5985-4cf2-9777-4bb642ad05b8}"
-      // NewExt "français-language-pack" "langpack-fr@firefox.mozilla.org"
+      // NewExt "dictionnaire-français1" "fr-dicollecte@dictionaries.addons.mozilla.org"
       // {"*".installation_mode = "blocked";};
   # Configure Search engines
   SearchEngines = {

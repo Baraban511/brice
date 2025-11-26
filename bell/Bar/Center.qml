@@ -18,7 +18,6 @@ Rectangle {
                 id: workspaceRect
                 required property HyprlandWorkspace modelData
                 color: workspaceArea.containsMouse ? "#121416" : "#212223"
-                //Layout.alignment: Qt.AlignCenter
                 width: 30
                 Layout.fillHeight: true
                 radius: 6

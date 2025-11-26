@@ -15,6 +15,11 @@
       file = ../secrets/rclone.conf;
       owner = "barab";
     };
+    secrets.joplin = {
+      file = ../secrets/joplin.json;
+      path = "/home/barab/.config/joplin-desktop/settings.json";
+      owner = "barab";
+    };
   };
 
   xdg.mime = {

@@ -31,7 +31,7 @@ Item {
                 }
                 Image {
                     anchors.centerIn: parent
-                    source: "icons/reload-wallpaper.svg"
+                    source: "../icons/reload-wallpaper.svg"
                     width: 16
                     height: 16
                 }
@@ -47,7 +47,7 @@ Item {
                 text: root.time
                 color: "#ffffff"
                 font.pointSize: 12
-                font.weight: Font.DemiBold
+                font.weight: Font.Bold
             }
         }
     }

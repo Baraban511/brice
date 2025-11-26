@@ -5,4 +5,5 @@ let
 in {
   "unsplash.age".publicKeys = systems;
   "rclone.conf".publicKeys = systems;
+  "joplin.json".publicKeys = systems;
 }

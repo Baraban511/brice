@@ -31,7 +31,7 @@
     bibata-cursors
     regreet
     hyprlock
-    albert
+    rofi
     imagemagick
     jq
     bc
@@ -56,6 +56,7 @@
     ente-auth
     wallust
     bitwarden-desktop
+    hyprsunset
   ];
 
   fonts = {

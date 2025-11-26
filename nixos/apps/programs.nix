@@ -7,9 +7,11 @@
       syntaxHighlighting.enable = true;
       shellAliases = {
         zed = "zeditor";
+        wifi = "nmtui";
         brice = "zeditor brice && exit";
         rebuild = "git -C /home/barab/brice add . && sudo nixos-rebuild switch --flake /home/barab/brice/";
         update = "nix flake update --flake /home/barab/brice && flatpak update --noninteractive";
+        optimize = "sudo nix-store --optimize && nix-store --gc";
       };
 
       histSize = 1000;
@@ -43,18 +45,19 @@
         gcloud.disabled = true;
       };
     };
-    bash = {
-      undistractMe.enable = true; # Notifications for long-running commands
-      completion.enable = true;
-      shellAliases = {
-        # Shell aliases
-        zed = "zeditor";
-        brice = "zeditor brice && exit";
-        rebuild = "git -C /home/barab/brice add . && sudo nixos-rebuild switch --flake /home/barab/brice/";
-        update = "nix flake update --flake /home/barab/brice && nix flake update --flake /home/barab/brice/bags && flatpak update --noninteractive";
-        optimize = "sudo nix-store --optimize && nix-store --gc";
-      };
-    };
+    # bash = {
+    #   undistractMe.enable = true; # Notifications for long-running commands
+    #   completion.enable = true;
+    #   shellAliases = {
+    #     # Shell aliases
+    #     zed = "zeditor";
+    #     wifi = "nmtui";
+    #     brice = "zeditor brice && exit";
+    #     rebuild = "git -C /home/barab/brice add . && sudo nixos-rebuild switch --flake /home/barab/brice/";
+    #     update = "nix flake update --flake /home/barab/brice && flatpak update --noninteractive";
+    #     optimize = "sudo nix-store --optimize && nix-store --gc";
+    #   };
+    # };
     firefox = {
       enable = true;
       policies = import ./firefox/policies.nix;
@@ -63,25 +66,15 @@
     hyprland.enable = true;
     kdeconnect.enable = true;
     neovim.enable = true;
-    hyprlux = {
-      enable = true;
-      night_light = {
-        enabled = true;
-        # Manual sunset and sunrise
-        start_time = "22:00";
-        end_time = "06:00";
-        # Automatic sunset and sunrise
-        latitude = 45.750000;
-        longitude = 4.850000;
-        temperature = 3500;
-      };
-      # vibrance_configs = [
-      #   {
-      #     window_class = "steam_app_1172470";
-      #     window_title = "Apex Legends";
-      #     strength = 100;
-      #   }
-      # ];
-    };
+    # hyprlux = {
+    #   enable = true;
+    #   night_light = {
+    #     enabled = true;
+    #     # Automatic sunset and sunrise
+    #     latitude = 45.750000;
+    #     longitude = 4.850000;
+    #     temperature = 3500;
+    #   };
+    # };
   };
 }

@@ -22,42 +22,33 @@ Item {
                 Layout.preferredWidth: 30
                 radius: 6
                 color: trayArea.containsMouse ? "#7f000000" : "#212223"
-                // Text {
-                //     anchors.centerIn: parent
-                //     text: trayRect.modelData.title
-                // }
+
                 MouseArea {
                     id: trayArea
                     anchors.fill: parent
                     hoverEnabled: true
-                    onClicked: popupWindow.visible = !popupWindow.visible
+                    onClicked: popupWindow.item.visible = !popupWindow.item.visible
                     IconImage {
                         anchors.centerIn: trayArea
                         source: trayRect.modelData.icon
                         width: 16
                         height: 16
                     }
-                    PopupWindow {
+                    LazyLoader {
                         id: popupWindow
-                        anchor.window: barWindow
-                        anchor.rect.x: parentWindow.width / 2 - width / 2
-                        anchor.rect.y: parentWindow.height
-                        implicitWidth: 500
-                        implicitHeight: 500
-                        visible: false
-                        color: "#7f000000"
+                        loading: true
+                        PopupWindow {
+                            anchor.window: barWindow
+                            anchor.rect.x: parentWindow.width / 2 - width / 2
+                            anchor.rect.y: parentWindow.height
+                            implicitWidth: 500
+                            implicitHeight: 500
+                            color: "#7f000000"
+                            Text {
+                                text: trayRect.modelData.title
+                            }
+                        }
                     }
-                    // QsMenuAnchor {
-                    //     id: trayMenu
-                    //     menu: trayRect.modelData.menu
-
-                    //     anchor {
-                    //         item: trayRect
-                    //         edges: Edges.Right | Edges.Bottom
-                    //         gravity: Edges.Left | Edges.Bottom
-                    //         adjustment: PopupAdjustment.All
-                    //     }
-                    // }
                 }
             }
         }
