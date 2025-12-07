@@ -1,4 +1,3 @@
-//@ pragma UseQApplication
 import Quickshell
 import "./Bar" as Bar
 import "./Volume" as Volume

@@ -58,32 +58,4 @@
     bitwarden-desktop
     hyprsunset
   ];
-
-  fonts = {
-    packages = with pkgs; [
-      # Nerd Fonts (Noto & Fira Code)
-      nerd-fonts.noto
-      nerd-fonts.fira-code
-
-      # material-design-icons
-      # adwaita-icon-theme
-
-      # Polices utiles / classiques
-      dejavu_fonts
-      liberation_ttf
-      source-code-pro
-      ubuntu-classic
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-color-emoji
-    ];
-
-    # (optionnel) forcer une police par défaut dans le système
-    fontconfig.defaultFonts = {
-      monospace = ["FiraCode Nerd Font" "Source Code Pro"];
-      sansSerif = ["Noto Sans" "Liberation Sans"];
-      serif = ["Noto Serif" "Liberation Serif"];
-      emoji = ["Noto Color Emoji"];
-    };
-  };
 }

@@ -39,15 +39,12 @@
   time.timeZone = "Europe/Paris"; # Time zone
 
   i18n.defaultLocale = "fr_FR.UTF-8"; # Internationalisation properties.
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "fr";
-  };
   hardware.enableRedistributableFirmware = true;
   users.defaultUserShell = pkgs.zsh;
   imports = [
     ./boot.nix
     ./networking.nix
     ./systemd.nix
+    ./fonts.nix
   ];
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ## Author : Aditya Shakya (adi1090x)
-## Github : @adi1090x
+## Github : @adi1090x / edited by barab
 #
 ## Rofi   : Power Menu
 
@@ -10,13 +10,13 @@ uptime=`uptime`
 host=`hostname`
 
 # Options
-shutdown=' Shutdown'
-reboot=' Reboot'
-lock=' Lock'
-suspend=' Suspend'
-logout=' Logout'
-yes=' Yes'
-no=' No'
+shutdown=' Shutdown'
+reboot=' Reboot'
+lock='󰌾 Lock'
+suspend=' Suspend'
+logout='󰗽 Logout'
+yes=' Yes'
+no=' No'
 
 # Rofi CMD
 rofi_cmd() {
@@ -45,7 +45,7 @@ confirm_exit() {
 
 # Pass variables to rofi dmenu
 run_rofi() {
-	echo -e "$lock\n$suspend\n$logout\n$reboot\n$shutdown" | rofi_cmd
+	echo -e "$shutdown\n$reboot\n$lock\n$suspend\n$logout" | rofi_cmd
 }
 
 # Execute Command
@@ -53,13 +53,13 @@ run_cmd() {
 	selected="$(confirm_exit)"
 	if [[ "$selected" == "$yes" ]]; then
 		if [[ $1 == '--shutdown' ]]; then
-		    echo "test" #systemctl poweroff
+		    systemctl poweroff
 		elif [[ $1 == '--reboot' ]]; then
 			systemctl reboot
 		elif [[ $1 == '--suspend' ]]; then
 		    systemctl suspend
 		elif [[ $1 == '--logout' ]]; then
-		    loginctl lock-session
+            hyprctl dispatch exit
 		fi
 	else
 		exit 0

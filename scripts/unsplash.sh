@@ -52,7 +52,7 @@ echo "Luminosity : $LUM_INT, Chosen color : $color"
 magick $filename \
   -gravity Southwest \
   -fill "$color" \
-  -font "Noto-Sans-Mono-CJK-SC-Medium" \
+  -font "MonaspiceNe-NFP-Medium" \
   -pointsize 32 \
   -annotate +12+40 "Picture by $photographer on Unsplash" \
   $filename
@@ -61,7 +61,7 @@ if [[ "$location" != "null" ]]; then
     magick $filename \
       -gravity Southwest \
       -fill "$color" \
-      -font "Noto-Sans-Mono-CJK-SC-Medium" \
+      -font "MonaspiceNe-NFP-Medium" \
       -pointsize 32 \
       -annotate +12+7 "Location: $location" \
       $filename

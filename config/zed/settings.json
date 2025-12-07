@@ -13,14 +13,7 @@
       "username": "barab",
       "projects": [
         {
-          "paths": [
-            "/home/barab"
-          ]
-        },
-        {
-          "paths": [
-            "/home/barab/immich"
-          ]
+          "paths": ["/home/barab/immich"]
         }
       ]
     }
@@ -28,7 +21,6 @@
   "context_servers": {
     "beeper": {
       "env": {},
-      "source": "custom",
       "enabled": true,
       "command": "npx",
       "args": ["@beeper/mcp-remote"]
@@ -85,9 +77,8 @@
   "auto_install_extensions": {
     "html": true,
     "toml": true,
-    "wakatime": true,
     "hyprlang": true,
-    "git-firefly": true,
-    "nix": true
+    "nix": true,
+    "qml": true
   }
 }
