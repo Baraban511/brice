@@ -2,6 +2,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    spotify-player
     kdePackages.qtdeclarative
     quickshell
     openssl
@@ -17,7 +18,6 @@
     alejandra # Nix formatter
     nixd
     nil
-    rustup
     gcc
     nodejs
     hyprls

@@ -14,7 +14,7 @@
   # networking.firewall = {
   #   allowedTCPPorts = [1701 9001];
   # };
-  programs.bash.shellAliases = {
+  programs.zsh.shellAliases = {
     wifi = "nmtui";
   };
   powerManagement = {

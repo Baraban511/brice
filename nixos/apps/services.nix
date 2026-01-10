@@ -1,6 +1,7 @@
 {...}: {
   services = {
     hypridle.enable = true;
+    fwupd.enable = true;
     greetd = {
       enable = true;
       settings = {
