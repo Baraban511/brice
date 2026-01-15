@@ -3,7 +3,7 @@
   users.users.barab = {
     isNormalUser = true;
     home = "/home/barab";
-    extraGroups = ["wheel" "docker" "networkmanager" "plugdev"]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "docker" "networkmanager" "plugdev" "dialout"]; # Enable ‘sudo’ for the user.
   };
   age = {
     identityPaths = ["/home/barab/.ssh/id_ed25519"];

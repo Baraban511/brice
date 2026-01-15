@@ -6,7 +6,7 @@
       enable = true;
       settings = {
         default_session = {
-          command = "Hyprland --config /etc/greetd/hyprland.conf";
+          command = "start-hyprland -- -c /etc/greetd/hyprland.conf";
           user = "greeter";
         };
         terminal = {

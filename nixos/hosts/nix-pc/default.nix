@@ -124,7 +124,6 @@
     zettlr
     typst
     shotcut
-    spotify-player
   ];
   # systemd.services.onedrive-mount = {
   #   description = "Mount OneDrive using rclone";
