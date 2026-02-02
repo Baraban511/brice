@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=Messages
+Exec=chromium --app=https://messages.google.com/web --no-first-run --no-default-browser-check
+Icon=/home/barab/brice/config/desktop/icons/google-messages.svg
+StartupWMClass=messages

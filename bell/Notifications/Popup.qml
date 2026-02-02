@@ -42,6 +42,12 @@ Rectangle {
                     font.pointSize: 12
                     font.weight: Font.Bold
                 }
+                Image {
+                    Layout.alignment: Qt.AlignRight
+                    source: root.notification.image
+                    Layout.preferredHeight: 16
+                    Layout.preferredWidth: 16
+                }
 
                 // MouseArea {
                 //     width: 16
