@@ -8,15 +8,17 @@ Scope {
         model: Quickshell.screens
         PanelWindow {
             id: barWindow
+            property string test: Quickshell.env("BELL_TYPE")
             required property var modelData
             screen: modelData
             implicitHeight: 30
             anchors {
-                top: true
+                top: (test == "portable" ? true : true)
                 left: true
                 right: true
+                bottom: (test == "portable" ? true : false)
             }
-            color: "transparent"
+            color: (test == "portable" ? "transparent" : "transparent")
             RowLayout {
                 anchors.fill: parent
                 anchors.topMargin: 5

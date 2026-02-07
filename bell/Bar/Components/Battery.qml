@@ -10,7 +10,7 @@ Rectangle {
     radius: 6
     Text {
         anchors.centerIn: parent
-        text: UPower.displayDevice.percentage * 100 + "% - " + UPower.displayDevice.timeToEmpty + "s"
+        text: Math.round(UPower.displayDevice.percentage * 100) + "% - " + Math.round(UPower.displayDevice.timeToEmpty / 60) + "m"
         color: "#ffffff"
         font.pointSize: 12
         font.weight: Font.Bold
