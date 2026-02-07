@@ -41,7 +41,7 @@
         ];
       };
 
-      nix-default = nixpkgs.lib.nixosSystem {
+      default = nixpkgs.lib.nixosSystem {
         modules = [
           ./nixos/hosts/default
           extraApps

@@ -61,5 +61,6 @@
     wallust
     bitwarden-desktop
     hyprsunset
+    distrobox
   ];
 }

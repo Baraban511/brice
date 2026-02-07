@@ -14,7 +14,7 @@
   networking.hostName = "nix-default";
   hardware.graphics.enable = true;
   services.libinput.enable = true;
-  variables = {
+  environment.variables = {
     SWWW_TRANSITION_FPS = "120";
   };
 

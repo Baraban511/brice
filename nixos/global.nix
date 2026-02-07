@@ -2,10 +2,9 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.barab = {
     isNormalUser = true;
-    home = "/home/barab";
-    extraGroups = ["wheel" "docker" "networkmanager" "plugdev" "dialout"]; # Enable ‘sudo’ for the user.
-    createHome = true;
+    extraGroups = ["wheel" "podman" "networkmanager" "plugdev" "dialout"]; # Enable ‘sudo’ for the user.
   };
+  users.users.root.hashedPassword = "!"; # Disable root password
   age = {
     identityPaths = ["/home/barab/.ssh/id_ed25519" "/home/barab/age_ed25519"];
     secrets.unsplash = {
