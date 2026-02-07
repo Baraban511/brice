@@ -18,6 +18,10 @@
     alejandra # Nix formatter
     nixd
     nil
+    cargo
+    rustc
+    rust-analyzer
+    rustfmt
     gcc
     nodejs
     hyprls

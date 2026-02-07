@@ -5,6 +5,7 @@
       linkZed = "ln -sfn /home/barab/brice/config/zed /home/barab/.config/";
       linkFastfetch = "ln -sfn /home/barab/brice/config/fastfetch /home/barab/.config/";
       linkAlbert = "ln -sfn /home/barab/brice/config/albert /home/barab/.config/";
+      linkApplications = "ln -sfn /home/barab/brice/config/desktop/applications /home/barab/.local/share/";
       mkdirRclone = "mkdir -p /home/barab/rclone/Onedrive /home/barab/rclone/Cloudflare /home/barab/rclone/Freebox";
       configDir = "mkdir -p /home/barab/.config/brice";
       regreetState = "mkdir -p /var/lib/regreet && touch 'last_user = \"barab\"\n[user_to_last_sess]\nbarab = \"Hyprland\"' > /var/lib/regreet/state.toml";
@@ -20,6 +21,7 @@
   security = {
     rtkit.enable = true;
     polkit.enable = true;
+    pam.services.greetd.enableGnomeKeyring = true;
   };
 
   nix = {

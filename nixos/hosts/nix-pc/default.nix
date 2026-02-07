@@ -94,7 +94,10 @@
       splashImage = "/home/barab/brice/assets/boot.png";
     };
     timeout = 10;
-    efi.canTouchEfiVariables = true;
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot/efi"; # ← use the same mount point here.
+    };
   };
   # hardware.printers = {
   #   ensureDefaultPrinter = "Samsung_M2020";
