@@ -23,7 +23,6 @@
       plugins = with pkgs.obs-studio-plugins; [
         obs-vaapi # Enable GPU Hardware encoder through NVidia
         obs-backgroundremoval # Replace background in portait video & image
-        droidcam-obs
       ];
     };
     steam = {

@@ -5,7 +5,6 @@
     ../../global.nix
   ];
   environment.variables = {
-    BAGS_TYPE = "pc";
     SWWW_TRANSITION_FPS = "165"; # Yeees my screen is 165hz (but my GPU hates it)
   };
   networking = {

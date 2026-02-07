@@ -1,3 +1,4 @@
+### This is a boilerplate supposed to be used as a starting point for new brice configurations.
 {pkgs, ...}: {
   imports = [
     # Include the results of the hardware scan.
@@ -7,64 +8,14 @@
   boot = {
     loader = {
       efi.canTouchEfiVariables = true;
-      systemd-boot.enable = true; # Systemd boot
+      systemd-boot.enable = true;
     };
   };
-  networking.hostName = "nix-portable";
-  # networking.firewall = {
-  #   allowedTCPPorts = [1701 9001];
-  # };
-  programs.zsh.shellAliases = {
-    wifi = "nmtui";
-  };
-  powerManagement = {
-    enable = true;
-    powertop.enable = true;
-  };
-  hardware = {
-    graphics = {
-      enable = true;
-      extraPackages = with pkgs; [
-        intel-media-driver
-        intel-vaapi-driver
-        vpl-gpu-rt
-      ];
-    };
-    xone.enable = true;
-    bluetooth = {
-      enable = true;
-      settings = {
-        General = {
-          Experimental = true;
-        };
-      };
-    };
-    enableAllFirmware = true;
-  };
-  services = {
-    openssh = {
-      enable = true;
-      openFirewall = false;
-      knownHosts = {
-        nix-pc = {
-          hostNames = ["192.168.1.202" "100.96.0.1"];
-          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO0GFQia1VGrSKwryR0S+aJDmEDBAN5z2uio5hltmkPn nix pc";
-        };
-      };
-    };
-    libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
-    blueman.enable = true; # GUI Bluetooth manager
-  };
-  environment = {
-    systemPackages = with pkgs; [
-      moonlight-qt
-      brightnessctl
-      prismlauncher
-    ];
-    variables = {
-      SWWW_TRANSITION_FPS = "60";
-    };
-    sessionVariables = {LIBVA_DRIVER_NAME = "iHD";};
+  networking.hostName = "nix-default";
+  hardware.graphics.enable = true;
+  services.libinput.enable = true;
+  variables = {
+    SWWW_TRANSITION_FPS = "120";
   };
 
   # Copy the NixOS configuration file and link it from the resulting system

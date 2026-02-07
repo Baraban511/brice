@@ -4,9 +4,10 @@
     isNormalUser = true;
     home = "/home/barab";
     extraGroups = ["wheel" "docker" "networkmanager" "plugdev" "dialout"]; # Enable ‘sudo’ for the user.
+    createHome = true;
   };
   age = {
-    identityPaths = ["/home/barab/.ssh/id_ed25519"];
+    identityPaths = ["/home/barab/.ssh/id_ed25519" "/home/barab/age_ed25519"];
     secrets.unsplash = {
       file = ../secrets/unsplash.age;
       owner = "barab";

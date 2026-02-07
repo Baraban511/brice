@@ -20,6 +20,7 @@
       // NewExt "bitwarden-password-manager" "{446900e4-71c2-419f-a6a7-df9c091e268b}"
       // NewExt "svg-gobbler" "{7962ff4a-5985-4cf2-9777-4bb642ad05b8}"
       // NewExt "dictionnaire-français1" "fr-dicollecte@dictionaries.addons.mozilla.org"
+      // NewExt "private-grammar-checker-harper" "harper@writewithharper.com"
       // {"*".installation_mode = "blocked";};
   # Configure Search engines
   SearchEngines = {
