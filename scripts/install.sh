@@ -15,5 +15,10 @@ cp $key_dir /home/barab/.ssh/age_ed25519
 
 
 ### Set default wallpaper
+rm -r /home/barab/.config/brice
 mkdir -p /home/barab/.config/brice
-cp /home/barab/brice/assets/wallpaper.png /home/barab/.config/brice/unsplash.jpg
+cp /home/barab/brice/assets/wallpaper.jpg /home/barab/.config/brice/unsplash.jpg
+
+### Make changes available for nix
+git add .
+sudo nixos-rebuild switch --flake /home/barab/brice/nixos#default
