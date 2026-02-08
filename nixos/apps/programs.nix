@@ -1,5 +1,20 @@
 {pkgs, ...}: {
   programs = {
+    dconf = {
+      enable = true;
+      profiles.user.databases = [
+        {
+          settings."org/gnome/desktop/interface" = {
+            gtk-theme = "Adwaita-dark";
+            icon-theme = "Adwaita";
+            font-name = "Noto Sans Medium 11";
+            document-font-name = "Noto Sans Medium 11";
+            monospace-font-name = "Noto Sans Mono Medium 11";
+            color-scheme = "prefer-dark";
+          };
+        }
+      ];
+    };
     zsh = {
       enable = true;
       enableCompletion = true;
@@ -25,15 +40,6 @@
         obs-backgroundremoval # Replace background in portait video & image
       ];
     };
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = false; # Open ports in the firewall for Steam Remote Play
-      dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
-      localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-      gamescopeSession.enable = true;
-    };
-    gamescope.enable = true;
-
     git = {
       enable = true;
     };
@@ -44,19 +50,6 @@
         gcloud.disabled = true;
       };
     };
-    # bash = {
-    #   undistractMe.enable = true; # Notifications for long-running commands
-    #   completion.enable = true;
-    #   shellAliases = {
-    #     # Shell aliases
-    #     zed = "zeditor";
-    #     wifi = "nmtui";
-    #     brice = "zeditor brice && exit";
-    #     rebuild = "git -C /home/barab/brice add . && sudo nixos-rebuild switch --flake /home/barab/brice/";
-    #     update = "nix flake update --flake /home/barab/brice && flatpak update --noninteractive";
-    #     optimize = "sudo nix-store --optimize && nix-store --gc";
-    #   };
-    # };
     firefox = {
       enable = true;
       policies = import ./firefox/policies.nix;
@@ -65,15 +58,5 @@
     hyprland.enable = true;
     kdeconnect.enable = true;
     neovim.enable = true;
-    # hyprlux = {
-    #   enable = true;
-    #   night_light = {
-    #     enabled = true;
-    #     # Automatic sunset and sunrise
-    #     latitude = 45.750000;
-    #     longitude = 4.850000;
-    #     temperature = 3500;
-    #   };
-    # };
   };
 }

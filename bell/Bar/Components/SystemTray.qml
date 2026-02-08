@@ -3,7 +3,6 @@ import QtQuick
 import Quickshell.Services.SystemTray
 import QtQuick.Layouts
 import Quickshell
-import Quickshell.Widgets
 
 Repeater {
     model: SystemTray.items
@@ -20,11 +19,18 @@ Repeater {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: popupWindow.item.visible = !popupWindow.item.visible
-            IconImage {
+            Image {
                 anchors.centerIn: trayArea
-                source: trayRect.modelData.icon
+                source: updateImagePath(trayRect.modelData.icon)
                 width: 16
                 height: 16
+                function updateImagePath(path: string): string {
+                    if (path.includes("?path=")) {
+                        var tab = path.split("?path=");
+                        path = tab[1] + "/" + tab[0].replace("image://icon/", "");
+                    }
+                    return path;
+                }
             }
             LazyLoader {
                 id: popupWindow

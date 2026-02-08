@@ -30,7 +30,7 @@
     flatpak.enable = true;
     cloudflare-warp.enable = true;
     gvfs.enable = true; # For nautilus
-    upower.enable = true; # For Astal battery
+    upower.enable = true; # For battery
   };
   services.gnome.gnome-keyring.enable = true;
 }

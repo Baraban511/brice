@@ -8,11 +8,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.darwin.follows = ""; # Avoid darwin dependency
     };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = {
     nixpkgs,
     agenix,
+    nixos-hardware,
     ...
   }: let
     system = "x86_64-linux";
@@ -38,6 +40,14 @@
         modules = [
           ./nixos/hosts/nix-portable
           extraApps
+        ];
+      };
+
+      nix-frame = nixpkgs.lib.nixosSystem {
+        modules = [
+          ./nixos/hosts/nix-frame
+          extraApps
+          nixos-hardware.nixosModules.framework-amd-ai-300-series
         ];
       };
 

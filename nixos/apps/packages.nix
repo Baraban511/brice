@@ -47,7 +47,6 @@
     btop # Ressource monitor
     gnome-disk-utility
     pavucontrol
-    nwg-look # GTK theme editor
     caligula
     ### Utilities
     rquickshare

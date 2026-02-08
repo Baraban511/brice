@@ -44,17 +44,17 @@
   };
 
   environment = {
-    etc."greetd".source = ../config/greetd;
-    etc."gtk-3.0/settings.ini".source = ../config/gtk-3.0.ini;
-    etc.regreet-session = {
-      # Write <text> to an immutable file in the /nix/store/
-      text = ''
-        last_user = "barab"
+    etc = {
+      "greetd".source = ../config/greetd;
+      regreet-session = {
+        text = ''
+          last_user = "barab"
 
-        [user_to_last_sess]
-        barab = "Hyprland"
-      '';
-      target = "regreet/state.toml";
+          [user_to_last_sess]
+          barab = "Hyprland"
+        '';
+        target = "regreet/state.toml";
+      };
     };
     sessionVariables = {
       NIXOS_OZONE_WL = "1"; # Hint Electron apps to use Wayland
@@ -68,6 +68,7 @@
       KITTY_CONFIG_DIRECTORY = "/home/barab/brice/config/kitty";
       XDG_SESSION_DESKTOP = "Hyprland";
       UNSPLASH_API_KEY = config.age.secrets.unsplash.path;
+      BROWSER = "firefox";
     };
   };
 

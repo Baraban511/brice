@@ -7,6 +7,14 @@
   environment.variables = {
     SWWW_TRANSITION_FPS = "165"; # Yeees my screen is 165hz (but my GPU hates it)
   };
+  steam = {
+    enable = true;
+    remotePlay.openFirewall = false; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+    gamescopeSession.enable = true;
+  };
+  gamescope.enable = false; # Steam full screen at startup
   networking = {
     hostName = "nix-pc";
   };
