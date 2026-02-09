@@ -61,5 +61,7 @@
     bitwarden-desktop
     hyprsunset
     distrobox
+    hyprshutdown
+    seahorse
   ];
 }

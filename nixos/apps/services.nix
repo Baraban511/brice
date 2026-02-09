@@ -31,6 +31,6 @@
     cloudflare-warp.enable = true;
     gvfs.enable = true; # For nautilus
     upower.enable = true; # For battery
+    gnome.gnome-keyring.enable = true;
   };
-  services.gnome.gnome-keyring.enable = true;
 }
