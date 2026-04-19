@@ -13,7 +13,7 @@ Rectangle {
         anchors.fill: parent
         hoverEnabled: true
         onClicked: if (!unsplash.running) {
-            swww.running = true;
+            awww.running = true;
         }
         Image {
             anchors.centerIn: parent
@@ -23,8 +23,8 @@ Rectangle {
         }
     }
     Process {
-        id: swww
-        command: ["swww", "img", "/home/barab/.config/brice/unsplash.jpg", "--transition-type", "grow", "--transition-pos", "top-left"]
+        id: awww
+        command: ["awww", "img", "/home/barab/.config/brice/unsplash.jpg", "--transition-type", "grow", "--transition-pos", "top-left"]
         onStarted: {
             wallust.running = true;
         }

@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=Outlook
+Exec=chromium --app=https://outlook.live.com --no-first-run --no-default-browser-check
+Icon=/home/barab/brice/config/desktop/icons/outlook.svg
+StartupWMClass=outlook

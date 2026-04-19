@@ -2,7 +2,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    spotify-player
     kdePackages.qtdeclarative
     quickshell
     openssl
@@ -27,11 +26,11 @@
     hyprls
     ### Needed
     kitty # Terminal
-    swww # Wallpaper utility
+    awww # Wallpaper utility
     hyprpolkitagent
     nautilus # File manager
-    gnome-themes-extra
-    adwaita-icon-theme
+    gnome-themes-extra # Adwaita
+    morewaita-icon-theme
     bibata-cursors
     regreet
     hyprlock
@@ -63,5 +62,12 @@
     distrobox
     hyprshutdown
     seahorse
+    eog # Image viewer
+    libheif # HEIC image support for Nautilus / EOG?
+    #libheif.out # For thumbnail support of HEIC images in Nautilus
+    cliphist
+    podman-compose
+    crosspipe
+    networkmanagerapplet
   ];
 }

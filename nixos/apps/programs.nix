@@ -1,12 +1,13 @@
 {pkgs, ...}: {
   programs = {
+    localsend.enable = true;
     dconf = {
       enable = true;
       profiles.user.databases = [
         {
           settings."org/gnome/desktop/interface" = {
             gtk-theme = "Adwaita-dark";
-            icon-theme = "Adwaita";
+            icon-theme = "MoreWaita";
             font-name = "Noto Sans Medium 11";
             document-font-name = "Noto Sans Medium 11";
             monospace-font-name = "Noto Sans Mono Medium 11";
@@ -26,7 +27,7 @@
         brice = "zeditor brice && exit";
         rebuild = "git -C /home/barab/brice add . && sudo nixos-rebuild switch --flake /home/barab/brice/";
         update = "nix flake update --flake /home/barab/brice && flatpak update --noninteractive";
-        optimize = "sudo nix-store --optimize && nix-store --gc";
+        #optimize = "sudo nix-store --optimize && nix-store --gc";
       };
 
       histSize = 1000;

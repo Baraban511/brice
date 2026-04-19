@@ -28,6 +28,9 @@ Rectangle {
     Process {
         id: inhibit
         running: false
-        command: ["..."]
+        command: ["systemd-inhibit", "--what=idle:sleep", "--who=bell", "--why=bell is blocking inhibit", "--mode=block", "sleep", "infinity"]
+        stdout: StdioCollector {
+            onStreamFinished: console.log(this.text)
+        }
     }
 }

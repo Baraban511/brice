@@ -25,14 +25,14 @@ Rectangle {
             if (mouse.button == Qt.RightButton || mouse.button == Qt.MiddleButton)
                 root.notification.dismiss();
             else
-                console.log(root.notification.actions, root.notification.image, root.notification.hasInlineReply);
+                console.log(root.notification.actions, root.notification.appIcon, root.notification.hasInlineReply);
         }
 
         ColumnLayout {
             RowLayout {
                 Layout.margins: 10
                 Image {
-                    source: root.notification.appIcon
+                    source: "/run/current-system/sw/share/icons/hicolor/scalable/apps/" + root.notification.appIcon //"/run/current-system/sw/share/icons/hicolor/128x128/apps/" + root.notification.appIcon
                     Layout.preferredWidth: 16
                     Layout.preferredHeight: 16
                 }

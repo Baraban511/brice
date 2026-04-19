@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=Powerpoint
+Exec=chromium --app=https://powerpoint.cloud.microsoft/ --no-first-run --no-default-browser-check
+Icon=/home/barab/brice/config/desktop/icons/powerpoint.svg
+StartupWMClass=powerpoint

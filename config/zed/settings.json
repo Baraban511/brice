@@ -7,39 +7,31 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "ssh_connections": [
-    {
-      "host": "192.168.1.203",
-      "username": "barab",
-      "projects": [
-        {
-          "paths": ["/home/barab/immich"]
-        }
-      ]
-    }
-  ],
+  "edit_predictions": {
+    "provider": "copilot",
+  },
+  "ssh_connections": [],
   "context_servers": {
     "beeper": {
       "env": {},
       "enabled": true,
       "command": "npx",
-      "args": ["@beeper/mcp-remote"]
-    }
+      "args": ["@beeper/mcp-remote"],
+    },
   },
   "agent": {
-    "always_allow_tool_actions": true,
-    "default_profile": "ask",
+    "default_profile": "write",
     "profiles": {
       "beeper": {
         "name": "Beeper",
-        "enable_all_context_servers": true
-      }
+        "enable_all_context_servers": true,
+      },
     },
     "model_parameters": [],
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-5"
-    }
+      "model": "claude-opus-4.6",
+    },
   },
   "auto_update": false,
   "unnecessary_code_fade": 0.5,
@@ -48,37 +40,34 @@
     "quick_actions": true,
     "selections_menu": true,
     "agent_review": true,
-    "code_actions": true
+    "code_actions": true,
   },
   "lsp": {
     "nil": {
       "initialization_options": {
         "formatting": {
-          "command": ["alejandra", "--quiet", "--"] // or ["nixfmt"]
-        }
+          "command": ["alejandra", "--quiet", "--"], // or ["nixfmt"]
+        },
       },
       "settings": {
         "diagnostics": {
-          "ignored": ["unused_bidings"]
-        }
-      }
-    }
+          "ignored": ["unused_bidings"],
+        },
+      },
+    },
   },
   "ui_font_size": 16,
   "buffer_font_size": 16,
   "theme": {
     "mode": "dark",
     "light": "One Light",
-    "dark": "One Dark"
-  },
-  "features": {
-    "edit_prediction_provider": "copilot"
+    "dark": "One Dark",
   },
   "auto_install_extensions": {
     "html": true,
     "toml": true,
     "hyprlang": true,
     "nix": true,
-    "qml": true
-  }
+    "qml": true,
+  },
 }

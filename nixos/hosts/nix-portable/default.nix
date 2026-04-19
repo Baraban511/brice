@@ -62,7 +62,7 @@
       prismlauncher
     ];
     variables = {
-      SWWW_TRANSITION_FPS = "60";
+      AWWW_TRANSITION_FPS = "60";
       BELL_TYPE = "portable";
     };
     sessionVariables = {LIBVA_DRIVER_NAME = "iHD";};

@@ -4,6 +4,14 @@
     ./hardware-configuration.nix
     ../../global.nix
   ];
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 16 * 1024; # 16 GB
+      options = ["discard"];
+    }
+  ];
+  zramSwap.enable = true;
   boot = {
     loader = {
       efi.canTouchEfiVariables = true;
@@ -14,15 +22,34 @@
   hardware = {
     bluetooth = {
       enable = true;
+      powerOnBoot = false;
+      settings = {
+        General = {
+          Enable = "Source,Sink,Media,Socket";
+          Experimental = true;
+        };
+      };
     };
     graphics.enable = true;
     enableAllFirmware = true;
     sensor.iio.enable = true; # Needed for desktop environments to detect/manage display brightness
   };
   services = {
+    logind.settings.Login = {
+      HandlePowerKey = "lock";
+      HandlePowerKeyLongPress = "poweroff";
+    };
+
     libinput.enable = true;
     blueman.enable = true; # Bluetooth manager
     fprintd.enable = true; # For fingerprint support
+    ollama = {
+      enable = true;
+      package = pkgs.ollama-rocm;
+    };
+    auto-cpufreq.enable = true;
+    power-profiles-daemon.enable = false; # To bypass nixos-hardware
+    tlp.enable = false; # To bypass nixos-harware
   };
 
   environment = {
@@ -30,7 +57,7 @@
       brightnessctl
     ];
     variables = {
-      SWWW_TRANSITION_FPS = "120";
+      AWWW_TRANSITION_FPS = "120";
       BELL_TYPE = "portable";
     };
   };
@@ -38,7 +65,6 @@
   programs.zsh.shellAliases = {
     wifi = "nmtui";
   };
-
   boot.kernelParams = [
     "clearcpuid=rdseed"
   ]; # Disable rseed due to security concern

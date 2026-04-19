@@ -29,7 +29,14 @@ fi
 
 # Download image
 filename="$DEST_DIR/unsplash.jpg"
-curl -s -L "$image_url&w=3840&h=2160&fit=crop&crop=entropy&auto=true" -o "$filename"
+
+
+resolution=$(hyprctl monitors | grep -oP '\d+x\d+@' | head -1 | tr -d '@')
+
+width=$(echo "$resolution" | cut -d'x' -f1)
+height=$(echo "$resolution" | cut -d'x' -f2)
+
+curl -s -L "$image_url&w=${width}&h=${height}&fit=crop&crop=entropy&auto=true" -o "$filename"
 
 photographer=$(echo "$response" | jq -r '.user.name')
 location=$(echo "$response" | jq -r '.location.name')

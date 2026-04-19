@@ -5,7 +5,7 @@ import "./Components/" as Components
 
 Item {
     id: root
-    implicitWidth: 190
+    implicitWidth: 300
     Layout.fillHeight: true
     RowLayout {
         anchors.fill: parent

@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=Google Meet
+Exec=chromium --app=https://meet.google.com/ --no-first-run --no-default-browser-check
+Icon=/home/barab/brice/config/desktop/icons/meet.svg
+StartupWMClass=google_meet

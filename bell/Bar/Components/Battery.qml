@@ -10,7 +10,7 @@ Rectangle {
     radius: 6
     Text {
         anchors.centerIn: parent
-        text: Math.round(UPower.displayDevice.percentage * 100) + "% - " + getRemainingTime(UPower.displayDevice.timeToEmpty)
+        text: Math.round(UPower.displayDevice.percentage * 100) + "% - " + getRemainingTime(UPower.onBattery ? UPower.displayDevice.timeToEmpty : UPower.displayDevice.timeToFull)
         color: "#ffffff"
         font.pointSize: 12
         font.weight: Font.Bold
@@ -24,5 +24,8 @@ Rectangle {
                 return min + "m" + sec;
             }
         }
+    }
+    Image {
+        source: UPower.onBattery ? "../../icons/mdi-battery-off.svg" : "../../icons/mdi-battery-charging.svg"
     }
 }

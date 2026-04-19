@@ -20,12 +20,15 @@
       nssmdns4 = true;
       openFirewall = true;
     };
+
     pipewire = {
-      # Sound manager
       enable = true;
       pulse.enable = true;
       alsa.enable = true;
     };
+    pulseaudio.extraConfig = "
+      load-module module-switch-on-connect
+    ";
     printing.enable = true; # CUPS to manage printers
     flatpak.enable = true;
     cloudflare-warp.enable = true;

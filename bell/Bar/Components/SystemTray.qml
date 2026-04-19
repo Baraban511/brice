@@ -2,7 +2,6 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell.Services.SystemTray
 import QtQuick.Layouts
-import Quickshell
 
 Repeater {
     model: SystemTray.items
@@ -18,7 +17,7 @@ Repeater {
             id: trayArea
             anchors.fill: parent
             hoverEnabled: true
-            onClicked: popupWindow.item.visible = !popupWindow.item.visible
+            onClicked: trayRect.modelData.display(barWindow, Layout.x, Layout.y) //popupWindow.item.visible = !popupWindow.item.visible
             Image {
                 anchors.centerIn: trayArea
                 source: updateImagePath(trayRect.modelData.icon)
@@ -32,21 +31,25 @@ Repeater {
                     return path;
                 }
             }
-            LazyLoader {
-                id: popupWindow
-                loading: true
-                PopupWindow {
-                    anchor.window: barWindow
-                    anchor.rect.x: parentWindow.width / 2 - width / 2
-                    anchor.rect.y: parentWindow.height
-                    implicitWidth: 500
-                    implicitHeight: 500
-                    color: "#7f000000"
-                    Text {
-                        text: trayRect.modelData.title
-                    }
-                }
-            }
+            // LazyLoader {
+            //     id: popupWindow
+            //     loading: true
+            //     PopupWindow {
+            //         anchor.window: barWindow
+            //         anchor.rect.x: parentWindow.width / 2 - width / 2
+            //         anchor.rect.y: parentWindow.height
+            //         implicitWidth: 500
+            //         implicitHeight: 500
+            //         color: "#7f000000"
+            //         Text {
+            //             text: trayRect.modelData.title
+            //             color: "white"
+            //         }
+            //         MouseArea {
+            //             onClicked: console.log(trayRect.modelData.menu)
+            //         }
+            //     }
+            // }
         }
     }
 }

@@ -5,7 +5,7 @@
     ../../global.nix
   ];
   environment.variables = {
-    SWWW_TRANSITION_FPS = "165"; # Yeees my screen is 165hz (but my GPU hates it)
+    AWWW_TRANSITION_FPS = "165"; # Yeees my screen is 165hz (but my GPU hates it)
   };
   steam = {
     enable = true;
