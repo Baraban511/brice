@@ -3,6 +3,8 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../global.nix
+    ../../system/bluetooth.nix
+    ../../system/audio.nix
   ];
   swapDevices = [
     {
@@ -20,16 +22,6 @@
   };
   networking.hostName = "nix-frame";
   hardware = {
-    bluetooth = {
-      enable = true;
-      powerOnBoot = false;
-      settings = {
-        General = {
-          Enable = "Source,Sink,Media,Socket";
-          Experimental = true;
-        };
-      };
-    };
     graphics.enable = true;
     enableAllFirmware = true;
     sensor.iio.enable = true; # Needed for desktop environments to detect/manage display brightness
@@ -41,7 +33,6 @@
     };
 
     libinput.enable = true;
-    blueman.enable = true; # Bluetooth manager
     fprintd.enable = true; # For fingerprint support
     ollama = {
       enable = true;

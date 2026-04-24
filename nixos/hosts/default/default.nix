@@ -15,7 +15,7 @@
   hardware.graphics.enable = true;
   services.libinput.enable = true;
   environment.variables = {
-    SWWW_TRANSITION_FPS = "120";
+    AWWW_TRANSITION_FPS = "120";
   };
 
   # Copy the NixOS configuration file and link it from the resulting system

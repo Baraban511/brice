@@ -8,7 +8,6 @@
       mkdirRclone = "mkdir -p /home/barab/rclone/Onedrive /home/barab/rclone/Cloudflare /home/barab/rclone/Freebox";
       configDir = "mkdir -p /home/barab/.config/brice";
       joplinDir = "mkdir -p /home/barab/.config/joplin-desktop";
-      enableMprisPulse = "systemctl --user enable mpris-proxy.service";
     };
     activationScripts = {
       linkWallpaper = "ln -f /home/barab/.config/brice/unsplash.jpg /etc/unsplash.jpg";
@@ -19,7 +18,6 @@
     "d /var/lib/regreet 0755 greeter greeter - -"
   ];
   security = {
-    rtkit.enable = true; # Enable RealtimeKit for audio purposes
     polkit.enable = true;
     #pam.services.greetd.enableGnomeKeyring = true;
   };

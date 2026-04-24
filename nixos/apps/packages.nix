@@ -45,7 +45,6 @@
     fastfetch
     btop # Ressource monitor
     gnome-disk-utility
-    pavucontrol
     caligula
     ### Utilities
     rquickshare
@@ -67,7 +66,6 @@
     #libheif.out # For thumbnail support of HEIC images in Nautilus
     cliphist
     podman-compose
-    crosspipe
     networkmanagerapplet
   ];
 }
