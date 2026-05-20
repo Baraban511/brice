@@ -1,4 +1,8 @@
 {...}: {
+  hardware.wirelessRegulatoryDatabase = true;
+  boot.extraModprobeConfig = ''
+    options cfg80211 ieee80211_regdom="FR"
+  ''; # Ensure no international limitation is applied to wifi card
   networking = {
     wireless = {
       iwd = {
