@@ -1,15 +1,14 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell.Services.SystemTray
-import QtQuick.Layouts
 
 Repeater {
     model: SystemTray.items
     Rectangle {
         id: trayRect
         required property SystemTrayItem modelData
-        Layout.fillHeight: true
-        Layout.preferredWidth: 30
+        width: 30
+        height: 25
         radius: 6
         color: trayArea.containsMouse ? "#7f000000" : "#212223"
 
@@ -17,7 +16,7 @@ Repeater {
             id: trayArea
             anchors.fill: parent
             hoverEnabled: true
-            onClicked: trayRect.modelData.display(barWindow, Layout.x, Layout.y) //popupWindow.item.visible = !popupWindow.item.visible
+            onClicked: trayRect.modelData.display(barWindow, trayArea.x, trayArea.y) //popupWindow.item.visible = !popupWindow.item.visible
             Image {
                 anchors.centerIn: trayArea
                 source: updateImagePath(trayRect.modelData.icon)

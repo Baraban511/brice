@@ -29,6 +29,7 @@ Scope {
                 spacing: 5
                 Left {
                     Layout.alignment: Qt.AlignLeft
+                    implicitWidth: 300
                 }
                 Center {
                     Layout.alignment: Qt.AlignCenter
@@ -36,6 +37,7 @@ Scope {
 
                 Right {
                     Layout.alignment: Qt.AlignRight
+                    implicitWidth: 300
                 }
             }
         }

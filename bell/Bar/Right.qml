@@ -11,6 +11,10 @@ Item {
     RowLayout {
         anchors.fill: parent
         spacing: 5
+        Rectangle {
+            color: "transparent"
+            Layout.fillWidth: true
+        }
         Components.SystemTray {}
         Components.Battery {}
         Components.Inhibiter {}

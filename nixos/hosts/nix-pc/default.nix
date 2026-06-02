@@ -3,24 +3,24 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../global.nix
+    ../../system/bluetooth.nix
+    ../../system/audio.nix
   ];
   environment.variables = {
     AWWW_TRANSITION_FPS = "165"; # Yeees my screen is 165hz (but my GPU hates it)
   };
-  steam = {
+  programs.steam = {
     enable = true;
     remotePlay.openFirewall = false; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-    gamescopeSession.enable = true;
   };
-  gamescope.enable = false; # Steam full screen at startup
   networking = {
     hostName = "nix-pc";
   };
   boot.initrd.kernelModules = ["amdgpu"]; # Red team always
 
-  power.ups.mode = "standalone";
+  power.ups.mode = "standalone"; # For my UPS
   users.users.barab.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOrL/2pJHSITUsLRLVP8yB31F5HCtlYtmc4NKl14CLM3 nix-portable"
   ];
@@ -37,26 +37,7 @@
           type = "ed25519";
         }
       ];
-      banner = "Hi there...
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                                                                                                %%
-%%                                                                                                %%
-%%                                                                                                %%
-%%   %%%%%%%%%%%           %%%%       %%%%%%%%%%%          %%%%        %%%%%%%%%%%                %%
-%%   %%%%%%%%%%%%%         %%%%       %%%%%%%%%%%%%        %%%%        %%%%%%%%%%%%               %%
-%%   %%%       %%%%       %%%%%%      %%%%      %%%%      %%%%%%       %%%       %%%              %%
-%%   %%%       %%%%       %%%%%%%     %%%%      %%%%      %%%%%%%      %%%       %%%              %%
-%%   %%%      %%%%       %%%  %%%     %%%%      %%%%     %%%  %%%      %%%     %%%%%              %%
-%%   %%%%%%%%%%%%%%     %%%%  %%%%    %%%%      %%%%    %%%%  %%%%     %%%%%%%%%%%%%              %%
-%%   %%%       %%%%%    %%%    %%%    %%%%%%%%%%%%%     %%%    %%%     %%%       %%%%%            %%
-%%   %%%         %%%%  %%%%%%%%%%%%   %%%%%%%%%%%      %%%%%%%%%%%%    %%%         %%%            %%
-%%   %%%         %%%%  %%%%%%%%%%%%%  %%%%   %%%%      %%%%%%%%%%%%%   %%%         %%%            %%
-%%   %%%%%%%%%%%%%%%  %%%        %%%  %%%%     %%%    %%%        %%%   %%%%%%%%%%%%%%%   %%%%     %%
-%%   %%%%%%%%%%%%%%  %%%%        %%%% %%%%      %%%%  %%%        %%%%  %%%%%%%%%%%%%     %%%%     %%
-%%                                                                                                %%
-%%                                                                                                %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-";
+      settings.Banner = "/home/barab/brice/assets/ssh_banner";
       settings = {
         PasswordAuthentication = false;
         AllowUsers = ["barab"];
@@ -69,7 +50,6 @@
     fail2ban = {
       enable = true;
     }; # SSH brute-force protection
-    blueman.enable = true; # GUI Bluetooth manager
     hardware.openrgb.enable = true;
     sunshine = {
       enable = true;
@@ -84,7 +64,6 @@
   '';
 
   hardware = {
-    bluetooth.enable = true; # Enable support for Bluetooth
     i2c.enable = true;
     graphics = {
       enable = true;
@@ -107,17 +86,6 @@
       efiSysMountPoint = "/boot/efi"; # ← use the same mount point here.
     };
   };
-  # hardware.printers = {
-  #   ensureDefaultPrinter = "Samsung_M2020";
-  #   ensurePrinters = [
-  #     {
-  #       deviceUri = "ipp://192.168.1.174/ipp";
-  #       location = "home";
-  #       name = "Samsung_M2020";
-  #       model = "everywhere";
-  #     }
-  #   ];
-  # };
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -126,28 +94,12 @@
     catppuccin-grub
     ddcutil
     sunshine
-    catppuccinifier-cli
     # In tests
     openrgb-with-all-plugins
     ledfx
-    ente-auth
-    zettlr
     typst
     shotcut
   ];
-  # systemd.services.onedrive-mount = {
-  #   description = "Mount OneDrive using rclone";
-  #   wantedBy = ["multi-user.target"];
-  #   serviceConfig.Type = "simple";
-  #   serviceConfig.User = "barab";
-  #   script = ''
-  #     mkdir -p /mnt/onedrive
-  #     ${pkgs.rclone}/bin/rclone mount onedrive:/ /mnt/onedrive \
-  #       --vfs-cache-mode full \
-  #       --daemon
-  #   '';
-  #   after = ["network.target"];
-  # };
 
   # systemd.services.monitor-on = {
   #   description = "Allumer le moniteur via DDC/CI au démarrage";
