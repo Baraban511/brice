@@ -4,7 +4,6 @@
     ./hardware-configuration.nix
     ../../global.nix
     ../../system/bluetooth.nix
-    ../../system/audio.nix
   ];
   swapDevices = [
     {
@@ -15,6 +14,8 @@
   ];
   zramSwap.enable = true;
   boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
@@ -25,6 +26,7 @@
     graphics.enable = true;
     enableAllFirmware = true;
     sensor.iio.enable = true; # Needed for desktop environments to detect/manage display brightness
+    bluetooth.powerOnBoot = true;
   };
   services = {
     logind.settings.Login = {
@@ -34,10 +36,6 @@
 
     libinput.enable = true;
     fprintd.enable = true; # For fingerprint support
-    ollama = {
-      enable = true;
-      package = pkgs.ollama-rocm;
-    };
     auto-cpufreq.enable = true;
     power-profiles-daemon.enable = false; # To bypass nixos-hardware
     tlp.enable = false; # To bypass nixos-harware
@@ -46,19 +44,25 @@
   environment = {
     systemPackages = with pkgs; [
       brightnessctl
+      snapshot # Camera app
+      scrcpy # For using Android phone as webcam
+      hyprpwcenter
+      prismlauncher # Goated minecraft client
     ];
     variables = {
       AWWW_TRANSITION_FPS = "120";
       BELL_TYPE = "portable";
     };
   };
-
-  programs.zsh.shellAliases = {
-    wifi = "nmtui";
+  programs = {
+    steam = {
+      enable = true;
+    };
+    zsh.shellAliases = {
+      wifi = "nmtui";
+    };
   };
-  boot.kernelParams = [
-    "clearcpuid=rdseed"
-  ]; # Disable rseed due to security concern
+
   fileSystems."/boot".options = ["umask=0077"]; # Supposed to fix warnings about secret seed
 
   # This option defines the first version of NixOS you have installed on this particular machine,

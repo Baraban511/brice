@@ -51,7 +51,7 @@
     chromium
     beeper
     spotify
-    vesktop #discord
+    discord
     vlc
     joplin-desktop
     ente-auth
@@ -60,12 +60,25 @@
     hyprsunset
     distrobox
     hyprshutdown
-    seahorse
+    seahorse # Gnome keyring manager
     eog # Image viewer
-    libheif # HEIC image support for Nautilus / EOG?
-    #libheif.out # For thumbnail support of HEIC images in Nautilus
-    cliphist
+    libheif # HEIC image support for Nautilus
+    libheif.out # For thumbnail support of HEIC images in Nautilus
+    cliphist # Clipboard manager
     podman-compose
-    networkmanagerapplet
+    networkmanagerapplet # For managing wifi connections in the system tray
+    ffmpeg-headless # For thumbnail support of videos in Nautilus
+    ffmpegthumbnailer # For thumbnail support of videos in Nautilus
+    evince # For thumbnail support of pdf in Nautilus
+    libgsf # For thumbnail support of opendocuments in Nautilus
+    libnotify # notify-send
+    libsecret # Allow bitwarden-desktop to store secrets
   ];
+  environment.pathsToLink = [
+    "share/thumbnailers"
+  ]; # Allow usage of thumbnailers in nautilus
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-39.8.10"
+  ]; # Temporary for bitwarden-desktop
 }

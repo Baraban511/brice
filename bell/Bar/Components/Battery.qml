@@ -6,7 +6,7 @@ import Quickshell.Services.UPower
 Rectangle {
     color: "#212223"
     Layout.preferredWidth: 150
-    height: 25
+    height: 30
     radius: 6
     Text {
         anchors.centerIn: parent

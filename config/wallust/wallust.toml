@@ -35,6 +35,6 @@ check_contrast = true
 # target: ABSOLUTE path in which to place a file with generated templated values.
 # ¡ If either one is a directory, then both SHOULD be one. !
 kitty = { src = '/home/barab/brice/config/wallust/kitty.conf', dst = '/home/barab/.config/brice/kitty.conf' }
-hypr = { src = '/home/barab/brice/config/wallust/hyprland.conf', dst = '/home/barab/.config/brice/hypr.conf' }
+hypr = { src = '/home/barab/brice/config/wallust/borders.lua', dst = '/home/barab/.config/brice/borders.lua' }
 #css = { src = '/home/barab/brice/config/wallust/colors.css', dst = '/home/barab/brice/bags/colors.css' }
 #zed = { src = '/home/barab/brice/config/wallust/zed.json', dst = '/home/barab/brice/config/zed/themes/wallust.json' }

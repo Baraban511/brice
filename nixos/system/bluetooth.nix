@@ -2,23 +2,24 @@
   hardware = {
     bluetooth = {
       enable = true;
-      powerOnBoot = true;
       settings = {
         General = {
-          Enable = "Source,Sink,Media,Socket";
-          Experimental = true;
+          Experimental = true; # To access devices battery level
         };
       };
     };
   };
-  system.userActivationScripts = {
-    enableMprisPulse = "systemctl --user enable mpris-proxy.service";
-  };
   services = {
+    pipewire.wireplumber.extraConfig = {
+      "bluetooth" = {
+        "monitor.bluez.properties" = {
+          "bluez5.codecs" = ["sbc_xq" "aac" "aptx" "aptx_hd" "ldac" "lhdc"]; # List codecs I want to use, no "sbc" to force sbc_xq
+        };
+      };
+    };
     pulseaudio.extraConfig = "
       load-module module-switch-on-connect
-    ";
-    #blueman.enable = true; # Bluetooth manager
+    "; # This automatically switches to the newly connected Bluetooth audio device.
   };
 
   environment.systemPackages = with pkgs; [

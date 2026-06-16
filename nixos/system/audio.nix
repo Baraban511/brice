@@ -5,14 +5,6 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    wireplumber.extraConfig = {
-      "bluetooth" = {
-        "monitor.bluez.properties" = {
-          "bluez5.codecs" = ["sbc" "sbc_xq" "aac" "aptx" "aptx_hd"]; # List codecs I want to use "ldac" is broken now
-        };
-      };
-    };
-
     raopOpenFirewall = true;
     extraConfig.pipewire-pulse = {
       "context.properties" = {
@@ -20,23 +12,23 @@
       };
     };
     extraConfig.pipewire = {
-      "10-airplay" = {
-        "context.modules" = [
-          {
-            name = "libpipewire-module-raop-discover";
+      # "10-airplay" = {
+      #   "context.modules" = [
+      #     {
+      #       name = "libpipewire-module-raop-discover";
 
-            # increase the buffer size if you get dropouts/glitches
-            # args = {
-            #   "raop.latency.ms" = 500;
-            # };
-          }
-        ];
-      };
+      #       # increase the buffer size if you get dropouts/glitches
+      #       # args = {
+      #       #   "raop.latency.ms" = 500;
+      #       # };
+      #     }
+      #   ];
+      # };
     };
   };
   environment.systemPackages = with pkgs; [
     pwvucontrol
-    #paprefs
     crosspipe
+    playerctl # Control media players with function keys
   ];
 }

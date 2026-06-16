@@ -1,4 +1,14 @@
 {pkgs, ...}: {
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users = {
+    users = {
+      barab = {
+        isNormalUser = true;
+        extraGroups = ["wheel" "podman" "networkmanager" "plugdev" "dialout"]; #  Wheel enable ‘sudo’ for the user.
+      };
+      root.hashedPassword = "!"; # Disable root password
+    };
+  };
   system = {
     userActivationScripts = {
       linkHypr = "ln -sfn /home/barab/brice/config/hypr /home/barab/.config/";
@@ -35,28 +45,18 @@
     };
     settings.experimental-features = ["nix-command" "flakes"]; # Enable flakes and New ClI
   };
-  environment.etc = {
-    "xdg/gtk-2.0/gtkrc".text = "gtk-error-bell=0";
-    "xdg/gtk-3.0/settings.ini".text = ''
-      [Settings]
-      gtk-error-bell=false
-    '';
-    "xdg/gtk-4.0/settings.ini".text = ''
-      [Settings]
-      gtk-error-bell=false
-    '';
-  };
   time.timeZone = "Europe/Paris"; # Time zone
 
   i18n.defaultLocale = "fr_FR.UTF-8"; # Internationalisation properties.
   hardware = {
     enableRedistributableFirmware = true;
   };
-  users.defaultUserShell = pkgs.zsh;
   imports = [
     ./boot.nix
     ./networking.nix
     ./systemd.nix
     ./fonts.nix
+    ./shell.nix
+    ./audio.nix
   ];
 }

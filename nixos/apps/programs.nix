@@ -16,40 +16,16 @@
         }
       ];
     };
-    zsh = {
-      enable = true;
-      enableCompletion = true;
-      autosuggestions.enable = true;
-      syntaxHighlighting.enable = true;
-      shellAliases = {
-        zed = "zeditor";
-        wifi = "nmtui";
-        brice = "zeditor brice && exit";
-        rebuild = "git -C /home/barab/brice add . && sudo nixos-rebuild switch --flake /home/barab/brice/";
-        update = "nix flake update --flake /home/barab/brice && flatpak update --noninteractive";
-        #optimize = "sudo nix-store --optimize && nix-store --gc";
-      };
-
-      histSize = 1000;
-      histFile = "$HOME/.zsh_history";
-    };
     obs-studio = {
       enable = true; # Screen recording utility
       enableVirtualCamera = true;
       plugins = with pkgs.obs-studio-plugins; [
-        obs-vaapi # Enable GPU Hardware encoder through NVidia
+        obs-vaapi
         obs-backgroundremoval # Replace background in portait video & image
       ];
     };
     git = {
       enable = true;
-    };
-    starship = {
-      enable = true;
-      settings = {
-        aws.disabled = true;
-        gcloud.disabled = true;
-      };
     };
     firefox = {
       enable = true;

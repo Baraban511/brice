@@ -14,6 +14,7 @@ Item {
         Rectangle {
             color: "transparent"
             Layout.fillWidth: true
+            Layout.fillHeight: true
         }
         Components.SystemTray {}
         Components.Battery {}

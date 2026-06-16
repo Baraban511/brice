@@ -8,7 +8,7 @@ Repeater {
         id: trayRect
         required property SystemTrayItem modelData
         width: 30
-        height: 25
+        height: 30
         radius: 6
         color: trayArea.containsMouse ? "#7f000000" : "#212223"
 

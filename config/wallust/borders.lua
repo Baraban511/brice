@@ -1,0 +1,12 @@
+hl.config({
+    general = {
+        col = {
+            -- Here we use `saturate` filter to have more vibrant colors,
+            -- not matter the scheme, since the border should seek the attention
+            active_border   = { colors = { "rgb({{color1 | saturate(0.6) | strip}})", "rgb({{color2 | saturate(0.6) | strip}})", "rgb({{color3 | saturate(0.6) | strip}})", "rgb({{color4 | saturate(0.6) | strip}})", "rgb({{color5 | saturate(0.6) | strip}})", "rgb({{color6 | saturate(0.6) | strip}})" } },
+            -- color0 is almost the same as the background color,
+            -- by putting ee as the alpha, it makes it 100% transparent
+            inactive_border = "rgba({{color0 | strip}}ee)",
+        },
+    },
+})

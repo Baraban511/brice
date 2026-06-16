@@ -8,12 +8,24 @@ Rectangle {
     implicitWidth: workspaceRepeater.count * 30
     color: "#212223"
     radius: 6
+
     RowLayout {
         anchors.fill: parent
         spacing: 0
+
         Repeater {
             id: workspaceRepeater
-            model: Hyprland.workspaces
+            model: filterSpecialWorkspaces(Hyprland.workspaces)
+            function filterSpecialWorkspaces(workspace) {
+                let filter = [];
+                console.log(workspace.values);
+                for (let element of workspace.values) {
+                    if (element.name.startsWith("special:") == false) {
+                        filter.push(element);
+                    }
+                }
+                return filter;
+            }
             Rectangle {
                 id: workspaceRect
                 required property HyprlandWorkspace modelData
@@ -31,16 +43,10 @@ Rectangle {
                 }
                 Text {
                     anchors.centerIn: parent
-                    text: workspaceText(workspaceRect.modelData.name)
+                    text: workspaceRect.modelData.name
                     color: workspaceRect.modelData.active ? "#378df7" : "#f1f1f1"
                     font.pointSize: 12
                     font.weight: Font.DemiBold
-                    function workspaceText(text) {
-                        if (text == "special:magic")
-                            return 0;
-                        else
-                            return text;
-                    }
                 }
             }
         }

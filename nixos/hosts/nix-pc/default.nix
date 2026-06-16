@@ -1,10 +1,13 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../global.nix
     ../../system/bluetooth.nix
-    ../../system/audio.nix
   ];
   environment.variables = {
     AWWW_TRANSITION_FPS = "165"; # Yeees my screen is 165hz (but my GPU hates it)
@@ -18,12 +21,36 @@
   networking = {
     hostName = "nix-pc";
   };
-  boot.initrd.kernelModules = ["amdgpu"]; # Red team always
+  boot = {
+    initrd.kernelModules = ["amdgpu"]; # Red team always
 
+    extraModulePackages = [config.boot.kernelPackages.ddcci-driver];
+    kernelModules = ["i2c-dev" "ddcci_backlight"];
+
+    loader = {
+      grub = {
+        enable = true;
+        efiSupport = true;
+        device = "nodev"; # Empêche l'installation sur un périphérique spécifique
+        useOSProber = true; # Active la détection automatique des autres systèmes
+        default = "2";
+        theme = "${pkgs.catppuccin-grub}";
+        splashImage = "/home/barab/brice/assets/boot.png";
+      };
+      timeout = 10;
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi"; # ← use the same mount point here.
+      };
+    };
+  };
   power.ups.mode = "standalone"; # For my UPS
-  users.users.barab.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOrL/2pJHSITUsLRLVP8yB31F5HCtlYtmc4NKl14CLM3 nix-portable"
-  ];
+  users = {
+    motd = "\n\n Welcome back! (I hope)\n\n";
+    users.barab.openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOrL/2pJHSITUsLRLVP8yB31F5HCtlYtmc4NKl14CLM3 nix-portable"
+    ];
+  };
   services = {
     openssh = {
       enable = true;
@@ -58,7 +85,6 @@
       capSysAdmin = true;
     };
   };
-  users.motd = "\n\n Welcome back! (I hope)\n\n";
   environment.etc."ssh/sshrc".text = ''
     kdeconnect-cli -n "Nothing Phone 2a" --ping-msg "🔐 Connexion SSH sur $USER depuis $SSH_CONNECTION"
   '';
@@ -68,22 +94,6 @@
     graphics = {
       enable = true;
       enable32Bit = true;
-    };
-  };
-  boot.loader = {
-    grub = {
-      enable = true;
-      efiSupport = true;
-      device = "nodev"; # Empêche l'installation sur un périphérique spécifique
-      useOSProber = true; # Active la détection automatique des autres systèmes
-      default = "2";
-      theme = "${pkgs.catppuccin-grub}";
-      splashImage = "/home/barab/brice/assets/boot.png";
-    };
-    timeout = 10;
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi"; # ← use the same mount point here.
     };
   };
   # List packages installed in system profile. To search, run:

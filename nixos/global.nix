@@ -1,10 +1,4 @@
 {config, ...}: {
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.barab = {
-    isNormalUser = true;
-    extraGroups = ["wheel" "podman" "networkmanager" "plugdev" "dialout"]; # Enable ‘sudo’ for the user.
-  };
-  users.users.root.hashedPassword = "!"; # Disable root password
   age = {
     identityPaths = ["/home/barab/.ssh/id_ed25519" "/home/barab/age_ed25519"];
     secrets.unsplash = {
@@ -32,8 +26,8 @@
       "text/json" = "zed.desktop";
       "text/css" = "zed.desktop";
       "text/html" = "zed.desktop";
-      "image/png" = "swappy";
-      "image/jpeg" = "swappy";
+      "image/png" = "eog";
+      "image/jpeg" = "eog";
     };
   };
 
@@ -45,6 +39,15 @@
 
   environment = {
     etc = {
+      "xdg/gtk-2.0/gtkrc".text = "gtk-error-bell=0";
+      "xdg/gtk-3.0/settings.ini".text = ''
+        [Settings]
+        gtk-error-bell=false
+      '';
+      "xdg/gtk-4.0/settings.ini".text = ''
+        [Settings]
+        gtk-error-bell=false
+      '';
       "greetd".source = ../config/greetd;
       regreet-session = {
         text = ''
@@ -63,7 +66,7 @@
     variables = {
       XCURSOR_THEME = "Bibata-Modern-Classic";
       XCURSOR_SIZE = "16";
-      HYPRLAND_CONFIG = "brice/config/hypr/hyprland.conf";
+      HYPRLAND_CONFIG = "brice/config/hyprland/hyprland.lua";
       EDITOR = "zeditor --wait";
       KITTY_CONFIG_DIRECTORY = "/home/barab/brice/config/kitty";
       XDG_SESSION_DESKTOP = "Hyprland";
