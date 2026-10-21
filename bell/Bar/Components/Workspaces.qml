@@ -17,14 +17,7 @@ Rectangle {
             id: workspaceRepeater
             model: filterSpecialWorkspaces(Hyprland.workspaces)
             function filterSpecialWorkspaces(workspace) {
-                let filter = [];
-                console.log(workspace.values);
-                for (let element of workspace.values) {
-                    if (element.name.startsWith("special:") == false) {
-                        filter.push(element);
-                    }
-                }
-                return filter;
+                return workspace.values.filter(e => !e.name.startsWith("special:"));
             }
             Rectangle {
                 id: workspaceRect
