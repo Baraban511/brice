@@ -1,43 +1,28 @@
 pragma ComponentBehavior: Bound
 import QtQuick
-import QtQuick.Layouts
 import Quickshell.Io
 
 Rectangle {
-    Layout.preferredWidth: 30
-    Layout.fillHeight: true
+    width: 30
+    height: 30
     radius: 6
     color: wallpaper.containsMouse ? "#7f000000" : "#212223" //32000000
     MouseArea {
         id: wallpaper
         anchors.fill: parent
         hoverEnabled: true
-        onClicked: if (!unsplash.running) {
+        onClicked: if (!awww.running) {
             awww.running = true;
         }
         Image {
             anchors.centerIn: parent
-            source: "../../icons/reload-wallpaper.svg"
+            source: awww.running ? "../../icons/tabler-dots.svg" : "../../icons/reload-wallpaper.svg"
             width: 16
             height: 16
         }
     }
     Process {
         id: awww
-        command: ["awww", "img", "/home/barab/.config/brice/unsplash.jpg", "--transition-type", "grow", "--transition-pos", "top-left"]
-        onStarted: {
-            wallust.running = true;
-        }
-    }
-    Process {
-        id: wallust
-        command: ["wallust", "run", "/home/barab/.config/brice/unsplash.jpg", "-C", "/home/barab/brice/config/wallust/wallust.toml",]
-        onExited: {
-            unsplash.running = true;
-        }
-    }
-    Process {
-        id: unsplash
-        command: ["/home/barab/brice/scripts/unsplash.sh"]
+        command: ["wallpaper"]
     }
 }

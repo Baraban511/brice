@@ -12,5 +12,7 @@ Item {
         spacing: 5
         Components.Wallpaper {}
         Components.Time {}
+        Components.Airplane {}
+        Components.Mpris {}
     }
 }

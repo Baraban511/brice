@@ -1,36 +1,29 @@
-pragma ComponentBehavior: Bound
 import QtQuick
-import QtQuick.Layouts
 import Quickshell.Io
+import "." // to import the singleton from qmldir
 
 Rectangle {
-    Layout.preferredWidth: 30
-    Layout.fillHeight: true
+    width: 30
+    height: 30
     radius: 6
-    color: inhibit.running ? "red" : "#212223"
+    color: GlobalInhibit.running ? "red" : (wallpaper.containsMouse ? "#7f000000" : "#212223")
+
     MouseArea {
         id: wallpaper
         anchors.fill: parent
         hoverEnabled: true
-        onClicked: if (!inhibit.running) {
-            inhibit.running = true;
-        } else {
-            inhibit.running = false;
-            color: "#212223";
+        onClicked: {
+            if (!GlobalInhibit.running) {
+                GlobalInhibit.running = true;
+            } else {
+                GlobalInhibit.running = false;
+            }
         }
         Image {
             anchors.centerIn: parent
             source: "../../icons/mdi-coffee-outline"
             width: 16
             height: 16
-        }
-    }
-    Process {
-        id: inhibit
-        running: false
-        command: ["systemd-inhibit", "--what=idle:sleep", "--who=bell", "--why=bell is blocking inhibit", "--mode=block", "sleep", "infinity"]
-        stdout: StdioCollector {
-            onStreamFinished: console.log(this.text)
         }
     }
 }
