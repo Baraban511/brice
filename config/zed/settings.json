@@ -7,56 +7,92 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "diff_view_style": "unified",
+  "server_url": "https://zed.dev",
+  "proxy": "",
   "agent_servers": {
+    "antigravity-acp": {
+      "favorite_config_option_values": {
+        "model": ["gemini-4-argon", "gemini-4-neon"],
+      },
+      "default_config_options": {
+        "thinking_level": "medium",
+        "mode": "auto_edit",
+        "model": "gemini-4-neon",
+      },
+      "type": "registry",
+    },
     "github-copilot-cli": {
-      "type": "registry"
-    }
+      "default_config_options": {
+        "allow_all": "off",
+        "mode": "https://agentclientprotocol.com/protocol/session-modes#plan",
+      },
+      "type": "registry",
+    },
   },
-  "cli_default_open_behavior": "existing_window",
-  "terminal": {
-    "shell": "system"
-  },
-  "project_panel": {
-    "dock": "left"
-  },
-  "outline_panel": {
-    "dock": "left"
-  },
-  "collaboration_panel": {
-    "dock": "left"
-  },
-  "git_panel": {
-    "dock": "left"
-  },
+  "format_on_save": "on",
+  "disable_ai": false,
   "edit_predictions": {
     "provider": "copilot",
   },
-  "ssh_connections": [],
-  "context_servers": {
-    "beeper": {
-      "env": {},
-      "enabled": true,
-      "command": "npx",
-      "args": ["@beeper/mcp-remote"],
-    },
+  "show_edit_predictions": true,
+  "diff_view_style": "unified",
+  // "language_models": {
+  //   "openai_compatible": {
+  //     "flm": {
+  //       "api_url": "http://localhost:52625/v1",
+  //       "available_models": [
+  //         {
+  //           "name": "gemma4-it:e2b",
+  //           "display_name": "Gemma4",
+  //           "max_tokens": 128000,
+  //         },
+  //       ],
+  //     },
+  //   },
+  // },
+  "cli_default_open_behavior": "existing_window",
+  "terminal": {
+    "shell": "system",
   },
+  "project_panel": {
+    "dock": "left",
+  },
+  "outline_panel": {
+    "dock": "left",
+  },
+  "collaboration_panel": {
+    "dock": "left",
+  },
+  "git_panel": {
+    "dock": "left",
+  },
+  "ssh_connections": [],
+  // "context_servers": {
+  //   "beeper": {
+  //     "env": {},
+  //     "enabled": true,
+  //     "command": "npx",
+  //     "args": ["@beeper/mcp-remote"],
+  //   },
+  // },
   "agent": {
-    "sidebar_side": "right",
+    // "default_model": {
+    //   "provider": "flm",
+    //   "model": "gemma4-it:e2b",
+    //   "enable_thinking": false,
+    // },
+    "threads_sidebar": {
+      "position": "right",
+    },
     "dock": "right",
     "default_profile": "write",
-    "profiles": {
-      "beeper": {
-        "name": "Beeper",
-        "enable_all_context_servers": true,
-      },
-    },
+    // "profiles": {
+    //   "beeper": {
+    //     "name": "Beeper",
+    //     "enable_all_context_servers": true,
+    //   },
+    // },
     "model_parameters": [],
-    "default_model": {
-      "effort": "high",
-      "provider": "copilot_chat",
-      "model": "gpt-5-mini",
-    },
   },
   "auto_update": false,
   "unnecessary_code_fade": 0.5,
