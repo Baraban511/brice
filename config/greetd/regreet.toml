@@ -1,6 +1,6 @@
 [background]
 # Path to the background image
-path = "/etc/unsplash.jpg"
+path = "/home/barab/brice/assets/wallpaper.jpg"
 [GTK]
 # Whether to use the dark theme
 application_prefer_dark_theme = true

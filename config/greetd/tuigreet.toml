@@ -1,0 +1,77 @@
+[display]
+show_time = true
+greeting = """
+            =====       ######      ####            
+            ======       ######   ######            
+             ======       #############             
+              ======        ##########              
+       ======================########       =       
+      ========================######       ===      
+              =#####=          ######    ======     
+             ######              ###### ======      
+            ######                #####======       
+ ################                  ##============== 
+################                    ================
+ ##############==                  ================ 
+       ######=====                ======            
+      ###### ======              ======             
+     ######    ======           ======              
+      ###       ======########################      
+       #        =======######################       
+              ==========        ######              
+             =============       ######             
+            ======   ======       ######            
+            =====     ======       #####            
+"""
+align_greeting = "center"
+issue = false
+
+[layout]
+width = 76
+window_padding = 2
+container_padding = 2
+prompt_padding = 1
+
+[layout.widgets]
+time_position = "top"      # "top", "bottom", "default", "hidden"
+status_position = "bottom" # "top", "bottom", "default", "hidden"
+
+[remember]
+username = true
+session = true
+user_session = true
+
+
+[secret]
+mode = "characters" # "hidden" or "characters"
+characters = "*"
+
+# `[display] asterisks = true|false` remains supported for compatibility but is
+# deprecated. Migrate it to `secret.mode`; `secret.mode` wins if both are set.
+
+[keybindings]
+command = 2    # F2
+sessions = 3   # F3
+background = 4 # F4
+power = 12     # F12
+
+# [background]
+# kind = "doom" # or "none" to disable
+# fps = 30
+
+[theme]
+border = "white"
+text = "green"
+time = "blue"
+container = "black"
+title = "cyan"
+greet = "cyan"
+prompt = "magenta"
+input = "white"
+action = "bright-blue"
+button = "bright-red"
+
+[[outputs]]
+connector = "eDP-1"
+enabled = true
+primary = true
