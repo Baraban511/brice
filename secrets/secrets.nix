@@ -4,6 +4,7 @@ let
   systems = [nix-pc nix-portable];
 in {
   "unsplash.age".publicKeys = systems;
-  "rclone.conf".publicKeys = systems;
+  "rclone.age".publicKeys = systems;
   "joplin.json".publicKeys = systems;
+  "networks.age".publicKeys = systems;
 }
